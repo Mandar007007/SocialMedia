@@ -1,5 +1,8 @@
 const Post = require("../models/Post");
 const User = require("../models/User");
+const {sendEmail} = require("../middlewares/sendEmail")
+const crypto = require("crypto")
+
 
 exports.register = async (req, res) => {
     try {
@@ -239,4 +242,89 @@ exports.register = async (req, res) => {
         error:e.message
       })
     }
+  }
+
+  exports.forgotPassword = async (req,res) => {
+    try{
+
+      const user = await User.findOne({email:req.body.email})
+
+      if(!user)
+      {
+        return res.status(404).json({
+          success:false,
+          message:"User Not Found"
+        })
+      }
+
+      const resetPasswordToken = user.getResetPasswordToken();
+
+      const resetUrl = `${req.protocol}://${req.get("host")}/api/v1/password/reset/${resetPasswordToken}`;
+      const message = `Reset Your Password By Clicking On the LINK BELOW:\n\n${resetUrl}`;
+
+      try{
+
+        await sendEmail({email:req.body.email,
+        subject:"Reset Password",
+        message
+      })
+      res.status(200).json({
+        success:true,
+        message:`Email Sent To ${req.body.email}`
+      })
+      }catch(e)
+      {
+        user.resetPasswordExpire = undefined
+        user.resetPasswordToken = undefined
+        await user.save({validateBeforeSave:false})
+
+        res.status(500).json({
+          success:false,
+          message:e.message
+        })
+
+      }
+
+      await user.save();
+
+
+
+    }catch(e)
+    {
+      res.status(500).json({
+        success:false,
+        error:e.message
+      })
+    }
+  }
+
+  exports.resetPassword = async (req,res) => {
+      try{
+        const resetPasswordToken = crypto.createHash("sha256").update(req.params.token).digest("hex");
+
+        const user = await User.findOne({resetPasswordToken,resetPasswordExpire:{$gt:Date.now()}})
+        if(!user) return res.status(401).json({
+          success:false,
+          message:"Not A User"
+        })
+
+        user.password = req.body.password;
+        user.resetPasswordExpire = undefined;
+        user.resetPasswordToken = undefined
+
+        await user.save();
+
+          res.status(200).json({
+            success:true,
+            message:"Password reset successfully"
+          })
+
+      }catch(e)
+      {
+        res.status(500).json({
+          success:false,
+          message:e.message
+        })
+      }
+
   }
