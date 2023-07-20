@@ -1,13 +1,14 @@
 const express = require("express")
 const app = express();
 const cookieParser = require("cookie-parser")
-require("dotenv").config({path:"backend/config/config.env"})
-
+require("dotenv").config({ path: "backend/config/config.env" })
+const cors = require("cors")
 
 //middlewares
 app.use(express.json())
-app.use(express.urlencoded({extended:true}))
+app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
+app.use(cors())
 
 
 //routes
@@ -16,7 +17,7 @@ const user = require("./routes/user")
 
 
 //using routes
-app.use("/api/v1",post)
-app.use("/api/v1",user)
+app.use("/api/v1", post)
+app.use("/api/v1", user)
 
 module.exports = app;
