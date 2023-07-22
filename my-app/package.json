@@ -12,8 +12,11 @@
   "dependencies": {
     "@lottiefiles/lottie-player": "^2.0.2",
     "axios": "^1.4.0",
+    "lottie-player": "^1.0.0",
+    "lottie-react": "^2.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.14.2",
     "react-script": "^2.0.5",
     "web-vitals": "^3.4.0"
   },
