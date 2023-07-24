@@ -1,5 +1,7 @@
 import axios from "axios";
+
 function SignUpForm() {
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
@@ -7,9 +9,15 @@ function SignUpForm() {
     try {
       const response = await axios.post(
         "http://localhost:4000/api/v1/register",
-        formData
+        formData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
       );
       console.log(response);
+
     } catch (error) {
       console.error("Error:", error);
     }
@@ -29,6 +37,7 @@ function SignUpForm() {
         </label>
         <input
           type="text"
+          name="name"
           id="name"
           aria-labelledby="name"
           className="my-2 border-b-2 bg-transparent border-gray-400 focus:outline-none focus:border-slate-500 appearance-none"
@@ -38,6 +47,7 @@ function SignUpForm() {
         </label>
         <input
           type="email"
+          name="email"
           id="email"
           aria-labelledby="email"
           className="my-2 border-b-2 bg-transparent border-gray-400 focus:outline-none focus:border-slate-500 appearance-none"
@@ -47,7 +57,9 @@ function SignUpForm() {
         </label>
         <input
           type="password"
+          name="password"
           id="password"
+          aria-labelledby="password"
           className="my-2 border-b-2 bg-transparent border-gray-400 focus:outline-none focus:border-slate-500 appearance-none"
         />
         <div className="w-100 text-center">
