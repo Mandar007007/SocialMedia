@@ -1,15 +1,32 @@
+import React, { useState } from "react";
 import axios, { AxiosError } from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function SignUpForm() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
+  };
+
   interface ErrorResponseData {
     msg?: string;
     message?: string;
   }
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const formData = new FormData(event.currentTarget);
 
     try {
       const response = await axios.post(
@@ -21,7 +38,9 @@ function SignUpForm() {
           },
         }
       );
-      console.log(response);
+      const userData = response.data.user;
+      dispatch({ type: "SET_USER", payload: userData });
+      navigate("/");
     } catch (error) {
       const err = error as AxiosError<ErrorResponseData>;
       let message = "An error occurred during signup.";
@@ -54,6 +73,8 @@ function SignUpForm() {
           name="name"
           id="name"
           aria-labelledby="name"
+          value={formData.name}
+          onChange={handleChange}
           className="my-2 border-b-2 bg-transparent border-gray-400 focus:outline-none focus:border-slate-500 appearance-none"
         />
         <label htmlFor="email" className="my-2">
@@ -64,6 +85,8 @@ function SignUpForm() {
           name="email"
           id="email"
           aria-labelledby="email"
+          value={formData.email}
+          onChange={handleChange}
           className="my-2 border-b-2 bg-transparent border-gray-400 focus:outline-none focus:border-slate-500 appearance-none"
         />
         <label htmlFor="password" className="my-2">
@@ -74,6 +97,8 @@ function SignUpForm() {
           name="password"
           id="password"
           aria-labelledby="password"
+          value={formData.password}
+          onChange={handleChange}
           className="my-2 border-b-2 bg-transparent border-gray-400 focus:outline-none focus:border-slate-500 appearance-none"
         />
         <div className="w-100 text-center">
