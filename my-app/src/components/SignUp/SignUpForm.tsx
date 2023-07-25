@@ -1,7 +1,12 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function SignUpForm() {
-
+  interface ErrorResponseData {
+    msg?: string;
+    message?: string;
+  }
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
@@ -17,9 +22,18 @@ function SignUpForm() {
         }
       );
       console.log(response);
-
     } catch (error) {
-      console.error("Error:", error);
+      const err = error as AxiosError<ErrorResponseData>;
+      let message = "An error occurred during signup.";
+
+      if (err.response && err.response.data) {
+        if (err.response.data.msg) {
+          message = err.response.data.msg;
+        } else if (err.response.data.message) {
+          message = err.response.data.message;
+        }
+      }
+      toast.error(message);
     }
   };
 

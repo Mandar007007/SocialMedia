@@ -1,7 +1,17 @@
 import SignUpForm from "./SignUpForm";
 import { Link } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Signup() {
+  const contextClass = {
+    success: "bg-blue-100",
+    error: "bg-red-100",
+    info: "bg-gray-100",
+    warning: "bg-orange-100",
+    default: "bg-indigo-100",
+    dark: "bg-white-100 font-gray-300",
+  };
   return (
     <>
       <div className="flex flex-col h-screen w-screen sm:px-24 sm:py-16 sm:flex-row-reverse font-Lato shadow-lg shadow-cyan-100">
@@ -32,6 +42,15 @@ function Signup() {
           </div>
         </div>
       </div>
+      <ToastContainer
+        toastClassName={({ type }) =>
+          contextClass[type || "default"] +
+          " relative flex p-1 min-h-10 rounded justify-between overflow-hidden cursor-pointer opacity-90"
+        }
+        bodyClassName={() =>
+          "text-sm font-semibold text-black font-med block p-3"
+        }
+      />
     </>
   );
 }
