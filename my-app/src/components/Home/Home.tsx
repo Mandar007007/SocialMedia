@@ -11,6 +11,7 @@ function Home() {
   const handleSubmit = async () => {
     try {
       dispatch({ type: "CLEAR_USER" });
+
       navigate("/login");
     } catch (error) {
       console.error("Error during logout:", error);

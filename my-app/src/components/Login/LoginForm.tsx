@@ -30,13 +30,17 @@ function LoginForm() {
           headers: {
             "Content-Type": "application/json",
           },
+          withCredentials: true,
         }
       );
       const userData = response.data.user;
+      console.log("Response Headers:", response.headers);
+
       dispatch({ type: "SET_USER", payload: userData });
       navigate("/");
     } catch (error) {
       const err = error as AxiosError<ErrorResponseData>;
+      console.log(err)
       let message = "An error occurred during login.";
 
       if (err.response && err.response.data) {
