@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function SignUpForm() {
   const dispatch = useDispatch();
@@ -109,6 +110,12 @@ function SignUpForm() {
             Signup
           </button>
         </div>
+        <div className="basis-1/6 mb-6" style={{margin:"auto",padding:"1vmax"}}>
+            Already have account?{" "}
+            <span>
+              <Link to="/login">Login</Link>
+            </span>
+          </div>
       </form>
     </>
   );

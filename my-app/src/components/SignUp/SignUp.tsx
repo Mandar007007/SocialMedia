@@ -1,5 +1,4 @@
 import SignUpForm from "./SignUpForm";
-import { Link } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -33,12 +32,6 @@ function Signup() {
           </div>
           <div className="basis-4/6">
             <SignUpForm />
-          </div>
-          <div className="basis-1/6 mb-6">
-            Already have account?{" "}
-            <span>
-              <Link to="/login">Login</Link>
-            </span>
           </div>
         </div>
       </div>
