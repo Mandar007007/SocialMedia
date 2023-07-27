@@ -3,25 +3,28 @@ import Login from "./components/Login/Login";
 import Signup from "./components/SignUp/SignUp";
 import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
 import Home from "./components/Home/Home";
-// import axios from "axios";
-// import { useState, useEffect } from "react";
+
+import { useEffect } from "react";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+
 
 function App() {
-  // const [data, setData] = useState("");
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await axios.get("http://localhost:4000/api/v1/users");
-  //       console.log(response);
-  //       setData(response.data);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
+  const dispatch = useDispatch();
+  const loadUser = async () => {
+    const {data} = await axios.get('http://localhost:4000/api/v1/me',{
+      headers: {
+        "Content-Type": "application/json",
+      },
+      withCredentials: true,
+    })
+    dispatch({type:"SET_USER",payload:data.user})
+  }
 
-  //   fetchData();
-  // }, []);
+  useEffect(() => {
+    loadUser();
+  },[dispatch])
 
   return (
     <>

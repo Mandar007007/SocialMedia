@@ -1,5 +1,6 @@
 const intitalState = {
   user: null,
+  isAuthenticated:false
 };
 
 const userReducer = (state = intitalState, action) => {
