@@ -77,11 +77,13 @@ exports.register = async (req, res) => {
 
   exports.logout = async (req,res,next) => {
     try{
-
+      
+    
         res.status(200).cookie("token",null,{expires:new Date(Date.now()),httpOnly:true}).json({
             success:true,
             message:"Logged Out"
         })
+
 
     }catch(e)
     {
@@ -228,7 +230,13 @@ exports.register = async (req, res) => {
   exports.myProfile = async(req,res) => {
     try{
 
-      const user = await User.findById(req.user._id).populate("posts");
+      if (!req.user) {
+        return res.status(200).json({
+          message: "User not authenticated",
+        });
+      }
+
+      const user = await User.findById(req.user._id);
 
       res.status(200).json({
         success:true,

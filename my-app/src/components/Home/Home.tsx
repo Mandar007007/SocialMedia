@@ -1,7 +1,8 @@
+import axios from "axios";
 import React from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Home() {
   const {user} = useSelector((state) => state.user);
@@ -9,14 +10,22 @@ function Home() {
   const navigate = useNavigate();
 
   const handleSubmit = async () => {
-    try {
-      dispatch({ type: "CLEAR_USER" });
+      try {
+        dispatch({ type: "CLEAR_USER" });
 
-      navigate("/login");
-    } catch (error) {
-      console.error("Error during logout:", error);
-    }
-  };
+        const {data} = await axios.get("http://localhost:4000/api/v1/logout",{
+          headers:{
+            "Content-Type":"application/json"
+          },
+          withCredentials:true
+        })
+        navigate("/login")
+
+      } catch (error) {
+        console.error("Error during logout:", error);
+      }
+    };
+    
   return (
     <div>
       <h1>Hello, world!</h1>
@@ -26,16 +35,16 @@ function Home() {
           <p>Email: {user.email}</p>
         </div>
       )}
-      <form action="" onSubmit={handleSubmit}>
-        <div className="w-100 text-center">
+      
+      <div className="w-100 text-center">
           <button
-            type="submit"
+            onClick={handleSubmit}
             className="mt-10 p-2 rounded-full bg-slate-500 w-28 text-slate-50 hover:shadow-lg"
           >
             Logout
           </button>
         </div>
-      </form>
+    
     </div>
   );
 }
