@@ -39,3 +39,7 @@ body {
 .font-Roboto {
     font-family: "Roboto", sans-serif;
 }
+
+.hidden {
+    transform: translateX(-100%);
+}
