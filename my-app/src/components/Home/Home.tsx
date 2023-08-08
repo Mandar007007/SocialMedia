@@ -1,12 +1,12 @@
 import axios from "axios";
-import React from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
+import { RootState } from "../../store";
 
 function Home() {
-  const { user } = useSelector((state) => state.user);
+  const { user } = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -14,7 +14,7 @@ function Home() {
     try {
       dispatch({ type: "CLEAR_USER" });
 
-      const { data } = await axios.get("http://localhost:4000/api/v1/logout", {
+      await axios.get("http://localhost:4000/api/v1/logout", {
         headers: {
           "Content-Type": "application/json",
         },

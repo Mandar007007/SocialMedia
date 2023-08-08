@@ -1,6 +1,6 @@
 import { FaBars } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
-import React, { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, useAnimation } from "framer-motion";
 import Items from "./Items";
 
@@ -18,7 +18,7 @@ function Navbar() {
       x: isMenuOpen ? 0 : "100%",
       transition: { duration: 0.3 },
     });
-  }, [isMenuOpen]);
+  }, [isMenuOpen, controls]);
 
   return (
     <>
