@@ -10,27 +10,30 @@ import axios from "axios";
 function App() {
   const dispatch = useDispatch();
 
-const loadUser = async () => {
+  const loadUser = async () => {
     try {
       const { data } = await axios.get("http://localhost:4000/api/v1/me", {
         headers: {
           "Content-Type": "application/json",
         },
+        withCredentials:true
+       
       });
+
       if (data.user) {
-        return { type: "SET_USER", payload: data.user };
-      }
-      else{
-          return {type: "CLEAR_USER"}
+        dispatch({ type: "SET_USER", payload: data.user }); // Dispatch the action here
+      } else {
+        dispatch({ type: "CLEAR_USER" }); // Dispatch the action here
       }
     } catch (error) {
-      console.log(error.message)
+      console.log(error.message);
     }
   };
 
+
   useEffect(() => {
     loadUser();
-  }, [dispatch]);
+  }, []);
 
   return (
     <Router>

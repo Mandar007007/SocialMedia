@@ -9,6 +9,7 @@ const userReducer = (state = intitalState, action) => {
       return {
         ...state,
         user: action.payload,
+        isAuthenticated : true
       };
     case "CLEAR_USER":
       return {

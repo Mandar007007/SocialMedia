@@ -15,7 +15,7 @@ app.use(cors({
 
 //routes
 const post = require("./routes/post");
-const user = require("./routes/user")
+const user = require("./routes/user");
 
 
 //using routes
