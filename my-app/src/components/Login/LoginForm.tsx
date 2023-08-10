@@ -91,7 +91,7 @@ function LoginForm() {
         <motion.div variants={RightToLeft} className="w-100 text-center">
           <button
             type="submit"
-            className="w-[100%] my-10 text-lg font-bold bg-white text-black p-2 rounded-3xl hover:shadow-2xl"
+            className="w-[100%] my-10 text-lg font-bold bg-white text-black p-2 rounded-3xl hover:shadow-2xl sm:w-[50%]"
           >
             Login
           </button>
