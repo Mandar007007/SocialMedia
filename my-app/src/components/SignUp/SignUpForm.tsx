@@ -42,7 +42,7 @@ function SignUpForm() {
       );
       const userData = response.data.user;
       dispatch({ type: "SET_USER", payload: userData });
-      navigate("/");
+      navigate("/home");
     } catch (error) {
       const err = error as AxiosError<ErrorResponseData>;
       let message = "An error occurred during signup.";
@@ -57,17 +57,15 @@ function SignUpForm() {
       toast.error(message);
     }
   };
-
   return (
     <>
-      <motion.div variants={LeftToRight}>Welcome to, DevChatter</motion.div>
       <form
         onSubmit={handleSubmit}
         action=""
         method="POST"
-        className="flex flex-col p-10 text-left text-base sm:p-20"
+        className="flex flex-col mt-5 text-left text-base"
       >
-        <motion.label htmlFor="name" className="my-2">
+        <motion.label htmlFor="name" className="my-3">
           Name:
         </motion.label>
         <motion.input
@@ -78,10 +76,10 @@ function SignUpForm() {
           aria-labelledby="name"
           value={formData.name}
           onChange={handleChange}
-          className="my-2 border-b-2 bg-transparent border-gray-400 focus:outline-none focus:border-slate-600 focus:invalid:border-pink-600 invalid:border-pink-600
+          className="my-3 border-b-2 bg-transparent border-gray-400 focus:outline-none focus:border-slate-600 focus:invalid:border-pink-600 invalid:border-pink-600
  appearance-none"
         />
-        <motion.label htmlFor="email" className="my-2">
+        <motion.label htmlFor="email" className="my-3">
           Email:
         </motion.label>
         <motion.input
@@ -92,10 +90,10 @@ function SignUpForm() {
           aria-labelledby="email"
           value={formData.email}
           onChange={handleChange}
-          className="my-2 border-b-2 bg-transparent border-gray-400 focus:outline-none focus:border-slate-600 focus:invalid:border-pink-600 invalid:border-pink-600
+          className="my-3 border-b-2 bg-transparent border-gray-400 focus:outline-none focus:border-slate-600 focus:invalid:border-pink-600 invalid:border-pink-600
  appearance-none"
         />
-        <motion.label htmlFor="password" className="my-2">
+        <motion.label htmlFor="password" className="my-3">
           Password:
         </motion.label>
         <motion.input
@@ -106,13 +104,13 @@ function SignUpForm() {
           aria-labelledby="password"
           value={formData.password}
           onChange={handleChange}
-          className="my-2 border-b-2 bg-transparent border-gray-400 focus:outline-none focus:border-slate-600 focus:invalid:border-pink-600 invalid:border-pink-600
+          className="my-3 border-b-2 bg-transparent border-gray-400 focus:outline-none focus:border-slate-600 focus:invalid:border-pink-600 invalid:border-pink-600
  appearance-none"
         />
         <motion.div variants={LeftToRight} className="w-100 text-center">
           <button
             type="submit"
-            className="mt-10 p-2 rounded-full bg-slate-500 w-28 text-slate-50 hover:shadow-lg"
+            className="w-[100%] my-10 text-lg font-bold bg-white text-black p-2 rounded-3xl hover:shadow-2xl"
           >
             Signup
           </button>

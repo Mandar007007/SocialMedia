@@ -6,6 +6,7 @@ import Home from "./components/Home/Home";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import axios from "axios";
+import Index from "./components/Home/Index";
 
 function App() {
   const dispatch = useDispatch();
@@ -16,8 +17,7 @@ function App() {
         headers: {
           "Content-Type": "application/json",
         },
-        withCredentials:true
-       
+        withCredentials: true,
       });
 
       if (data.user) {
@@ -30,7 +30,6 @@ function App() {
     }
   };
 
-
   useEffect(() => {
     loadUser();
   }, []);
@@ -38,7 +37,8 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Index />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
       </Routes>

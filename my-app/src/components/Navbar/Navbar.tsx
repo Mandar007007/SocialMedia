@@ -40,7 +40,7 @@ function Navbar() {
         <motion.div className="h-screen w-3/4 bg-blue-50 shadow-sm ml-auto">
           <motion.div className="flex flex-row-reverse">
             <button className="m-3" title="Close Menu" onClick={toggleMenu}>
-              <IoMdClose size={35} />
+              <IoMdClose className="text-4xl text-blue-950" />
             </button>
           </motion.div>
           <Items />

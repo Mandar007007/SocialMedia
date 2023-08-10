@@ -39,7 +39,7 @@ function LoginForm() {
       console.log("Response Headers:", response.headers);
 
       dispatch({ type: "SET_USER", payload: userData });
-      navigate("/");
+      navigate("/home");
     } catch (error) {
       const err = error as AxiosError<ErrorResponseData>;
       console.log(err);
@@ -57,13 +57,12 @@ function LoginForm() {
   };
   return (
     <>
-      <motion.div variants={RightToLeft}>Welcome to, DevChatter</motion.div>
       <form
         onSubmit={handleSubmit}
         method="POST"
-        className="flex flex-col p-10 text-left text-base sm:p-20"
+        className="flex flex-col mt-5 text-left text-base"
       >
-        <motion.label htmlFor="email" className="my-2">
+        <motion.label htmlFor="email" className="my-3">
           Email:
         </motion.label>
         <motion.input
@@ -74,9 +73,9 @@ function LoginForm() {
           aria-labelledby="email"
           value={formData.email}
           onChange={handleChange}
-          className="my-2 border-b-2 bg-transparent border-gray-400 focus:outline-none focus:border-slate-500 focus:invalid:border-pink-600 invalid:border-pink-600 appearance-none"
+          className="my-3 border-b-2 bg-transparent border-gray-400 focus:outline-none focus:border-slate-500 focus:invalid:border-pink-600 invalid:border-pink-600 appearance-none"
         />
-        <motion.label htmlFor="password" className="my-2">
+        <motion.label htmlFor="password" className="my-3">
           Password:
         </motion.label>
         <motion.input
@@ -87,12 +86,12 @@ function LoginForm() {
           aria-labelledby="password"
           value={formData.password}
           onChange={handleChange}
-          className="my-2 border-b-2 bg-transparent border-gray-400 focus:outline-none focus:border-slate-500 focus:invalid:border-pink-600 invalid:border-pink-600 appearance-none"
+          className="my-3 border-b-2 bg-transparent border-gray-400 focus:outline-none focus:border-slate-500 focus:invalid:border-pink-600 invalid:border-pink-600 appearance-none"
         />
         <motion.div variants={RightToLeft} className="w-100 text-center">
           <button
             type="submit"
-            className="mt-10 p-2 rounded-full bg-slate-500 w-28 text-slate-50 hover:shadow-lg"
+            className="w-[100%] my-10 text-lg font-bold bg-white text-black p-2 rounded-3xl hover:shadow-2xl"
           >
             Login
           </button>
