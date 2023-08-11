@@ -1,14 +1,12 @@
 import { FaCopyright } from "react-icons/fa";
 import Login from "../Login/Login";
 import Signup from "../SignUp/SignUp";
-import { useRef, useState, useEffect } from "react";
-import { motion, useAnimation } from "framer-motion";
+import { useRef, useState } from "react";
+import { motion } from "framer-motion";
 import { contextClass } from "../../other/customToaster";
 import { ToastContainer } from "react-toastify";
 
 function Index() {
-  const loginControls = useAnimation();
-  const signupControls = useAnimation();
   const loginModalRef = useRef(null);
   const signupModalRef = useRef(null);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
@@ -20,20 +18,6 @@ function Index() {
   const toggleSignup = () => {
     setIsSignupOpen(!isSignupOpen);
   };
-
-  useEffect(() => {
-    loginControls.start({
-      y: isLoginOpen ? 0 : "100%",
-      transition: { duration: 0.3 },
-    });
-  }, [isLoginOpen, loginControls]);
-
-  useEffect(() => {
-    signupControls.start({
-      y: isSignupOpen ? 0 : "100%",
-      transition: { duration: 0.3 },
-    });
-  }, [isSignupOpen, signupControls]);
 
   const closeSignup = () => {
     setIsSignupOpen(false);
@@ -47,7 +31,7 @@ function Index() {
     <>
       <div className="h-screen w-screen flex flex-col bg-black text-white p-8 justify-center">
         <div className="flex flex-col justify-center sm:flex-row sm:items-center sm:justify-around">
-          <div className="flex justify-center items-center">
+          <div className="sm:flex sm:justify-center sm:items-center">
             <img
               src="/images/logo.svg"
               className="w-16 h-16 sm:w-[70%] sm:h-[70%]"
@@ -88,21 +72,59 @@ function Index() {
           2023 Devchatter
         </div>
       </div>
+
+      {/* Desktop */}
       <motion.div
         ref={loginModalRef}
-        className="h-screen w-screen fixed top-0 right-0 z-11 bg-slate-50/25 sm:p-60"
-        initial={{ y: "100%" }}
-        animate={loginControls}
-        exit={{ y: "100%" }}
+        className="h-screen w-screen fixed top-0 right-0 z-11 bg-slate-50/25 sm:p-60 hidden sm:block"
+        initial={{ scale: 0, visibility: "hidden" }}
+        animate={{
+          scale: isLoginOpen ? 1 : 0,
+          visibility: isLoginOpen ? "visible" : "hidden",
+        }}
+        exit={{ scale: 0 }}
+        transition={{ duration: 0.1 }}
       >
         <Login closeLogin={closeLogin} />
       </motion.div>
       <motion.div
         ref={signupModalRef}
-        className="h-screen w-screen fixed top-0 right-0 z-11 bg-slate-50/25 sm:p-48"
-        initial={{ y: "100%" }}
-        animate={signupControls}
+        className="h-screen w-screen fixed top-0 right-0 z-11 bg-slate-50/25 sm:p-48 hidden sm:block"
+        initial={{ scale: 0, visibility: "hidden" }}
+        animate={{
+          scale: isSignupOpen ? 1 : 0,
+          visibility: isSignupOpen ? "visible" : "hidden",
+        }}
+        exit={{ scale: 0 }}
+        transition={{ duration: 0.1 }}
+      >
+        <Signup closeSignup={closeSignup} />
+      </motion.div>
+
+      {/* Mobile */}
+      <motion.div
+        ref={loginModalRef}
+        className="h-screen w-screen fixed top-0 right-0 z-11 bg-slate-50/25 sm:p-60 sm:hidden"
+        initial={{ y: "100%", visibility: "hidden" }}
+        animate={{
+          y: isLoginOpen ? "0%" : "100%",
+          visibility: isLoginOpen ? "visible" : "hidden",
+        }}
         exit={{ y: "100%" }}
+        transition={{ duration: 0.3 }}
+      >
+        <Login closeLogin={closeLogin} />
+      </motion.div>
+      <motion.div
+        ref={signupModalRef}
+        className="h-screen w-screen fixed top-0 right-0 z-11 bg-slate-50/25 sm:p-48 sm:hidden"
+        initial={{ y: "100%", visibility: "hidden" }}
+        animate={{
+          y: isSignupOpen ? "0%" : "100%",
+          visibility: isSignupOpen ? "visible" : "hidden",
+        }}
+        exit={{ y: "100%" }}
+        transition={{ duration: 0.3 }}
       >
         <Signup closeSignup={closeSignup} />
       </motion.div>

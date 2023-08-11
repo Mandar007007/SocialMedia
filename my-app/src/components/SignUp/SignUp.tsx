@@ -8,10 +8,14 @@ function Signup({ closeSignup }) {
     <motion.div className="flex flex-col h-[100%] w-[100%] bg-black text-white p-8 sm:rounded-3xl sm:w-[50%]">
       <div className="flex items-center justify-between w-full">
         <button className="mr-auto" title="Close Login" onClick={closeSignup}>
-          <IoMdClose className="text-2xl" />
+          <IoMdClose className="text-2xl sm:text-4xl" />
         </button>
         <div className="flex items-center">
-          <img className="w-12 h-12" src="/images/logo.svg" alt="" />
+          <img
+            className="w-12 h-12 sm:h-20 sm:w-20"
+            src="/images/logo.svg"
+            alt=""
+          />
         </div>
       </div>
       <div className="my-10 text-3xl font-black">
