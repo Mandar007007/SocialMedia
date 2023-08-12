@@ -36,7 +36,6 @@ function LoginForm() {
         }
       );
       const userData = response.data.user;
-      console.log("Response Headers:", response.headers);
 
       dispatch({ type: "SET_USER", payload: userData });
       navigate("/home");
