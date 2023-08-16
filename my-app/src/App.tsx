@@ -3,8 +3,6 @@ import Login from "./components/Login/Login";
 import Signup from "./components/SignUp/SignUp";
 import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
 import Home from "./components/Home/Home";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
 import axios from "axios";
 
 function App() {
