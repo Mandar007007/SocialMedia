@@ -98,6 +98,8 @@ exports.likeAndUnlikePost = async (req, res) => {
 exports.getPostOfFollowing = async (req, res, next) => {
   try {
     const user = await User.findById(req.user._id).populate("following", "posts");
+    user.following.push(user._id)
+    
     const posts = await Post.find({
       owner: {
         $in: user.following
@@ -254,3 +256,41 @@ exports.deleteComment = async (req, res) => {
     })
   }
 }
+
+exports.getMyPosts = async(req,res) => {
+  try{
+    const posts = await Post.find({owner:{
+      $in:req.user._id
+    }})
+
+    res.status(200).json({
+      success:true,
+      posts
+    })
+
+  }catch(e)
+  {
+    res.status(500).json({
+      success:false,
+      error:e.message
+    })
+  }
+}
+
+exports.getLikedPosts = async (req, res, next) => {
+  try {
+    const likedPosts = await Post.find({
+      "likes._id": req.user._id
+    }).populate('owner');
+
+    res.status(200).json({
+      success: true,
+      likedPosts
+    });
+  } catch (e) {
+    res.status(500).json({
+      success: false,
+      message: e.message
+    });
+  }
+};
