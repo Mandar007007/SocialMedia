@@ -22,7 +22,7 @@ function Feed() {
           >
             <p
               className={`py-2 ${
-                isForyouOpen ? "border-b-4 border-orange-400" : ""
+                isForyouOpen ? "border-b-4 border-orange-400" : "opacity-50"
               }`}
             >
               For you
@@ -35,7 +35,7 @@ function Feed() {
           >
             <p
               className={`py-2 ${
-                isFollowingOpen ? "border-b-4 border-orange-400" : ""
+                isFollowingOpen ? "border-b-4 border-orange-400" : "opacity-50"
               }`}
             >
               Following

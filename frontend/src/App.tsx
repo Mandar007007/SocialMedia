@@ -5,6 +5,11 @@ import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
 import Home from "./components/Home/Home";
 import axios from "axios";
 import Index from "./components/Home/Index";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import Profile from "./components/Profile/Profile";
+
+
 
 function App() {
   const dispatch = useDispatch();
