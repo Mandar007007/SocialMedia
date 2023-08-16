@@ -9,8 +9,6 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import Profile from "./components/Profile/Profile";
 
-
-
 function App() {
   const dispatch = useDispatch();
 
