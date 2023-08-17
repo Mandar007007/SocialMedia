@@ -5,8 +5,6 @@ import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
 import Home from "./components/Home/Home";
 import axios from "axios";
 import Index from "./components/Home/Index";
-import { useDispatch } from "react-redux";
-import { useEffect } from "react";
 
 function App() {
   const dispatch = useDispatch();
@@ -21,9 +19,9 @@ function App() {
       });
 
       if (data.user) {
-        dispatch({ type: "SET_USER", payload: data.user }); // Dispatch the action here
+        dispatch({ type: "SET_USER", payload: data.user });
       } else {
-        dispatch({ type: "CLEAR_USER" }); // Dispatch the action here
+        dispatch({ type: "CLEAR_USER" });
       }
     } catch (error) {
       console.log(error.message);
@@ -41,6 +39,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </Router>
   );
