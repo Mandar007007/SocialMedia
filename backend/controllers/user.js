@@ -2,17 +2,31 @@ const Post = require("../models/Post");
 const User = require("../models/User");
 const {sendEmail} = require("../middlewares/sendEmail")
 const crypto = require("crypto")
+const cloudinary = require('cloudinary').v2
+
+cloudinary.config({
+    cloud_name:'dxggp2ecx',
+    api_key:'755829262882474',
+    api_secret:'7T3NB1Xl96OGUiCDLNRX_NuV3p0'
+})
 
 
 exports.register = async (req, res) => {
     try {
       const { name, email, password } = req.body;
+      const file = req.files.avtar
+      let url = "sample url",public_id = "sampleid"
+
+      await cloudinary.uploader.upload(file.tempFilePath,(err,result)=>{
+        url = result.url
+        public_id = result.public_id
+      })
   
       let user = await User.findOne({ email });
   
       if (user) return res.status(500).json({ success: false, msg: "User already exists" });
   
-      user = await User.create({ name, email, password, avatar: { public_id: "sample", url: "sample" } });
+      user = await User.create({ name, email, password, avtar: { public_id: public_id, url: url } });
   
       const token = await user.generateToken();
 
@@ -157,6 +171,7 @@ exports.register = async (req, res) => {
     try{
       const user = await User.findById(req.user._id)
       const {name,email} = req.body
+      const file = req.files.avtar
 
       if(name)
       {
@@ -165,6 +180,15 @@ exports.register = async (req, res) => {
       if(email)
       {
         user.email = email
+      }
+      if(file)
+      {
+        let url,public_id
+        await cloudinary.uploader.upload(file.tempFilePath,(err,result)=>{
+          url = result.url
+          public_id = result.public_id
+        })
+        user.avtar = {url,public_id}
       }
 
       await user.save()
