@@ -7,7 +7,7 @@ function Profile() {
   
   return (
     <>
-      <About/>
+      <About />
       <Footer />
       <MyFeed />
     </>

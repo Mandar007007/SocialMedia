@@ -15,12 +15,26 @@ function SignUpForm() {
     name: "",
     email: "",
     password: "",
+    avtar:null
+
   });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
+    const { name, value, files } = event.target;
+  
+    if (files) {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        [name]: files[0],
+      }));
+    } else {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        [name]: value,
+      }));
+    }
   };
+  
 
   interface ErrorResponseData {
     msg?: string;
@@ -36,7 +50,7 @@ function SignUpForm() {
         formData,
         {
           headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "multipart/form-data",
           },
         }
       );
@@ -90,6 +104,19 @@ function SignUpForm() {
           aria-labelledby="email"
           value={formData.email}
           onChange={handleChange}
+          className="my-3 border-b-2 bg-transparent border-gray-400 focus:outline-none focus:border-slate-600 focus:invalid:border-pink-600 invalid:border-pink-600
+ appearance-none"
+        />
+        <motion.label htmlFor="email" className="my-3">
+          Avtar:
+        </motion.label>
+        <motion.input
+          variants={LeftToRight}
+          type="file"
+          name="avtar"
+          id="avtar"
+          onChange={handleChange}
+          aria-labelledby="avtar"
           className="my-3 border-b-2 bg-transparent border-gray-400 focus:outline-none focus:border-slate-600 focus:invalid:border-pink-600 invalid:border-pink-600
  appearance-none"
         />
