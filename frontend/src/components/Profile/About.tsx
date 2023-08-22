@@ -13,9 +13,13 @@ function About() {
           </button>
         </div>
         <div className="w-[100%] h-28 bg-orange-400 relative">
+<<<<<<< HEAD
           <div className="w-20 h-20 left-2 bg-slate-200 border-blue-50 absolute -bottom-10 rounded-full">
             <img src={user.avtar.url}></img>
           </div>
+=======
+          <div className="w-20 h-20 left-2 bg-slate-200 border-blue-50 absolute -bottom-10 rounded-full"></div>
+>>>>>>> 4a8cb46488c7ba0e535d9b237bfc66f836b76d35
           <button
             className="border-slate-400 text-slate-300 border-2 absolute -bottom-11 right-2 p-1 px-2 rounded-3xl"
             title="Close Login"
