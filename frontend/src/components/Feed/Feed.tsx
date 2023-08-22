@@ -13,7 +13,7 @@ function Feed() {
 
   return (
     <>
-      <div className="w-screen text-white">
+      <div className="w-full text-white">
         <div className="flex flex-row w-full py-3 relative">
           <button
             className="basis-1/2 flex justify-center items-center"
@@ -22,7 +22,7 @@ function Feed() {
           >
             <p
               className={`py-2 ${
-                isForyouOpen ? "border-b-4 border-orange-400" : ""
+                isForyouOpen ? "border-b-4 border-orange-400" : "opacity-50"
               }`}
             >
               For you
@@ -35,7 +35,7 @@ function Feed() {
           >
             <p
               className={`py-2 ${
-                isFollowingOpen ? "border-b-4 border-orange-400" : ""
+                isFollowingOpen ? "border-b-4 border-orange-400" : "opacity-50"
               }`}
             >
               Following
