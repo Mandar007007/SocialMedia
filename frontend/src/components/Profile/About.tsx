@@ -2,9 +2,11 @@ import { BsCalendar3 } from "react-icons/bs";
 import { FaRegArrowAltCircleLeft } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
+import { useEffect } from "react";
 
 function About() {
-    const { user } = useSelector((state: RootState) => state.user);
+  const {user}  = useSelector((state: RootState) => state.user);
+
     return (
         <div className="w-screen relative text-white">
         <div className="flex flex-row bg-black text-white justify-center items-center pt-2 h-14 fixed">
@@ -13,6 +15,7 @@ function About() {
           </button>
         </div>
         <div className="w-[100%] h-28 bg-orange-400 relative">
+
           <div className="w-20 h-20 left-2 bg-slate-200 border-blue-50 absolute -bottom-10 rounded-full">
             <img src={user.avtar.url}></img>
           </div>
