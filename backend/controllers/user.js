@@ -15,7 +15,7 @@ exports.register = async (req, res) => {
     try {
       const { name, email, password } = req.body;
       const file = req.files.avtar
-      let url = "sample url",public_id = "sampleid"
+      let url = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.vecteezy.com%2Ffree-vector%2Fdefault-profile-picture&psig=AOvVaw0VI5-gwluF2jryHsQr2C14&ust=1692935729740000&source=images&cd=vfe&opi=89978449&ved=0CA4QjRxqFwoTCLDXztyz9IADFQAAAAAdAAAAABAI",public_id = "sampleid"
 
       await cloudinary.uploader.upload(file.tempFilePath,(err,result)=>{
         url = result.url

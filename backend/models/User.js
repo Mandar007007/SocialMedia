@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema({
     },
     avtar: {
         public_id: String,
-        url: String
+        url: String,
     },
     email: {
         type: String,
@@ -40,6 +40,11 @@ const userSchema = new mongoose.Schema({
         {
             type: mongoose.Schema.ObjectId,
             ref: "User"
+        }
+    ],
+    keywords: [
+        {
+            type:String
         }
     ],
     createdAt: {
