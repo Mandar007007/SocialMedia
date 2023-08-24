@@ -3,8 +3,11 @@ import { motion } from "framer-motion";
 import React, { useState } from "react";
 import axios, { AxiosError } from "axios";
 import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
 
 function TweetForm({ closeTweetForm }) {
+  const { user } = useSelector((state: RootState) => state.user);
   const [formData, setFormData] = useState({
     caption: "",
   });
@@ -56,7 +59,13 @@ function TweetForm({ closeTweetForm }) {
         className="flex flex-col text-left text-base"
       >
         <motion.div className="w-100 text-center flex flex-row items-center">
-          <div className="w-10 h-10 bg-orange-50 rounded-3xl"></div>
+          (user &&{" "}
+          <img
+            className="w-16 h-16 rounded-full border-1 border-orange-400"
+            src={user.avtar.url}
+            alt="profile-pic"
+          />
+          )
           <button
             type="submit"
             className="w-[30%] my-10 text-lg font-bold bg-orange-400 text-white p-2 rounded-3xl hover:shadow-2xl sm:w-[50%] ml-auto"

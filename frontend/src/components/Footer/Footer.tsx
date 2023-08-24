@@ -6,8 +6,10 @@ import { CgCommunity } from "react-icons/cg";
 import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import Tweet from "../Tweet/Tweet";
+import { useNavigate } from "react-router-dom";
 
 function Footer() {
+  const navigate = useNavigate();
   const tweetFormModalRef = useRef(null);
   const [isTweetFormOpen, setIsTweetFormOpen] = useState(false);
 
@@ -18,6 +20,7 @@ function Footer() {
   const closeTweetForm = () => {
     setIsTweetFormOpen(false);
   };
+
   return (
     <>
       <div className="fixed bottom-0 w-full flex flex-col text-white ">
@@ -29,7 +32,10 @@ function Footer() {
         </div>
         <div className="w-[100%] h-14 flex flex-row justify-around items-center">
           <div className="w-full flex justify-center text-xl font-semibold my-3">
-            <BiHomeSmile className="text-2xl" />
+            <BiHomeSmile
+              className="text-2xl"
+              onClick={() => navigate("/home")}
+            />
           </div>
           <div className="w-full flex justify-center text-xl font-semibold my-3">
             <FaWpexplorer className="text-2xl" />
