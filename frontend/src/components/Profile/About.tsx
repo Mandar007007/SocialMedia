@@ -23,9 +23,8 @@ function About() {
         <img
           className="w-24 h-24 left-2 bg-slate-200 border-8 border-orange-400 absolute -bottom-10 rounded-full"
           alt="profile pic"
-          src={user.avtar.url}
+          src={user && user.avtar.url}
         ></img>
-
         <button
           className="border-slate-400 text-slate-300 border-2 absolute -bottom-11 right-2 p-1 px-2 rounded-3xl"
           title="Close Login"
