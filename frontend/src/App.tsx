@@ -1,6 +1,4 @@
 import "./App.css";
-import Login from "./components/Login/Login";
-import Signup from "./components/SignUp/SignUp";
 import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
 import Home from "./components/Home/Home";
 import axios from "axios";

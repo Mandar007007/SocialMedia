@@ -38,18 +38,6 @@ function MyFeed() {
         </button>
         <button
           className="basis-1/3 flex justify-center items-center"
-          onClick={showReplies}
-        >
-          <p
-            className={`py-2 ${
-              isRepliesOpen ? "border-b-4 border-orange-400" : "opacity-50"
-            }`}
-          >
-            Replies
-          </p>
-        </button>
-        <button
-          className="basis-1/3 flex justify-center items-center"
           onClick={showLiked}
         >
           <p
@@ -60,9 +48,21 @@ function MyFeed() {
             Liked
           </p>
         </button>
+        <button
+          className="basis-1/3 flex justify-center items-center"
+          onClick={showReplies}
+        >
+          <p
+            className={`py-2 ${
+              isRepliesOpen ? "border-b-4 border-orange-400" : "opacity-50"
+            }`}
+          >
+            Replies
+          </p>
+        </button>
       </div>
       <hr className="border-t-2 border-slate-500" />
-      <MyPosts />
+      {isPostsOpen && <MyPosts />}
     </div>
   );
 }
