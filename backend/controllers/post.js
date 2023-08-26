@@ -83,11 +83,13 @@ exports.likeAndUnlikePost = async (req, res) => {
       const index = likes.indexOf(userId);
       post.likes.splice(index, 1);
       await post.save();
-      return res.status(200).json({ success: true, message: "Post Unliked" });
+      const updatedLikesCount = post.likes.length;
+      return res.status(200).json({ success: true, message: "Post Unliked", updatedLikesCount });
     } else {
       post.likes.push({ _id: req.user._id });
       await post.save();
-      return res.status(200).json({ success: true, message: "Post Liked" });
+      const updatedLikesCount = post.likes.length;
+      return res.status(200).json({ success: true, message: "Post Liked", updatedLikesCount });
     }
   } catch (e) {
     res.status(500).json({ success: false, message: e.message });
@@ -99,7 +101,7 @@ exports.getPostOfFollowing = async (req, res, next) => {
   try {
     const user = await User.findById(req.user._id).populate("following", "posts");
     user.following.push(user._id)
-    
+
     const posts = await Post.find({
       owner: {
         $in: user.following
@@ -257,22 +259,23 @@ exports.deleteComment = async (req, res) => {
   }
 }
 
-exports.getMyPosts = async(req,res) => {
-  try{
-    const posts = await Post.find({owner:{
-      $in:req.user._id
-    }})
+exports.getMyPosts = async (req, res) => {
+  try {
+    const posts = await Post.find({
+      owner: {
+        $in: req.user._id
+      }
+    })
 
     res.status(200).json({
-      success:true,
+      success: true,
       posts
     })
 
-  }catch(e)
-  {
+  } catch (e) {
     res.status(500).json({
-      success:false,
-      error:e.message
+      success: false,
+      error: e.message
     })
   }
 }

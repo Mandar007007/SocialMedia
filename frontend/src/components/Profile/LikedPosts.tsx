@@ -1,8 +1,7 @@
 import Post from "../components/Post";
 import axios, { AxiosError } from "axios";
 import { useEffect, useState } from "react";
-
-function MyPosts() {
+function LikedPosts() {
   interface ErrorResponseData {
     msg?: string;
     message?: string;
@@ -13,12 +12,15 @@ function MyPosts() {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const res = await axios.get("http://localhost:4000/api/v1/posts/me", {
-          headers: {
-            "Content-Type": "application/json",
-          },
-          withCredentials: true,
-        });
+        const res = await axios.get(
+          "http://localhost:4000/api/v1/posts/liked",
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+            withCredentials: true,
+          }
+        );
         setPosts(res.data.posts);
       } catch (error) {
         const err = error as AxiosError<ErrorResponseData>;
@@ -38,4 +40,4 @@ function MyPosts() {
   );
 }
 
-export default MyPosts;
+export default LikedPosts;
