@@ -97,7 +97,7 @@ exports.likeAndUnlikePost = async (req, res) => {
 };
 
 
-exports.getPostOfFollowing = async (req, res, next) => {
+exports.getPostOfFollowing = async (req, res) => {
   try {
     const user = await User.findById(req.user._id).populate("following", "posts");
     user.following.push(user._id)
@@ -265,7 +265,7 @@ exports.getMyPosts = async (req, res) => {
       owner: {
         $in: req.user._id
       }
-    })
+    }).sort({ createdAt: -1 });
 
     res.status(200).json({
       success: true,
@@ -280,15 +280,13 @@ exports.getMyPosts = async (req, res) => {
   }
 }
 
-exports.getLikedPosts = async (req, res, next) => {
+exports.getLikedPosts = async (req, res) => {
   try {
-    const likedPosts = await Post.find({
-      "likes._id": req.user._id
-    }).populate('owner');
+    const posts = await Post.find({ "likes._id": req.user._id }).sort({ createdAt: -1 });
 
     res.status(200).json({
       success: true,
-      likedPosts
+      posts
     });
   } catch (e) {
     res.status(500).json({
@@ -297,3 +295,20 @@ exports.getLikedPosts = async (req, res, next) => {
     });
   }
 };
+
+
+exports.getRecommendation = async (req, res) => {
+  try {
+    const posts = await Post.find({}).sort({ createdAt: -1 });
+    res.status(200).json({
+      success: true,
+      posts
+    });
+  }
+  catch (e) {
+    res.status(500).json({
+      success: false,
+      message: e.message
+    });
+  }
+}
