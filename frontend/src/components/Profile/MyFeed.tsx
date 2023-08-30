@@ -1,5 +1,6 @@
 import { useState } from "react";
 import MyPosts from "./MyPosts";
+import LikedPosts from "./LikedPosts";
 
 function MyFeed() {
   const [isPostsOpen, setPostsOpen] = useState(true);
@@ -63,6 +64,8 @@ function MyFeed() {
       </div>
       <hr className="border-t-2 border-slate-500" />
       {isPostsOpen && <MyPosts />}
+      {isLikedOpen && <LikedPosts />}
+      <div className="h-40 w-full"></div>
     </div>
   );
 }

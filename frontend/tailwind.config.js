@@ -8,7 +8,17 @@ export default {
     extend: {
       boxShadow: {
         '3xl': '0 20px 50px -10px rgba(0, 0, 0, 0.3)',
+      },
+      borderWidth: {
+        DEFAULT: '1px',
+        '1': '0.5px',
+        '2': '2px',
+        '3': '3px',
+        '4': '4px',
+        '6': '6px',
+        '8': '8px',
       }
+
     },
   },
   screens: {

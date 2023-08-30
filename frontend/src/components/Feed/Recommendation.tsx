@@ -1,20 +1,19 @@
-import Post from "../components/Post";
 import axios, { AxiosError } from "axios";
 import { useEffect, useState } from "react";
+import Post from "../components/Post";
 
-function LikedPosts() {
+function Recommendation() {
   interface ErrorResponseData {
     msg?: string;
     message?: string;
   }
-
-  const [posts, setPosts] = useState([]); // Provide the type here
+  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     const fetchPosts = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:4000/api/v1/posts/liked",
+          "http://localhost:4000/api/v1/posts/recommendation",
           {
             headers: {
               "Content-Type": "application/json",
@@ -23,12 +22,12 @@ function LikedPosts() {
           }
         );
         setPosts(res.data.posts);
+        console.log(res.data);
       } catch (error) {
         const err = error as AxiosError<ErrorResponseData>;
         console.log(err);
       }
     };
-
     fetchPosts();
   }, []);
 
@@ -41,4 +40,4 @@ function LikedPosts() {
   );
 }
 
-export default LikedPosts;
+export default Recommendation;

@@ -1,12 +1,24 @@
 import { BsChat } from "react-icons/bs";
-import { MdFavoriteBorder } from "react-icons/md";
+import { MdFavoriteBorder, MdFavorite } from "react-icons/md";
 import { LiaBookmarkSolid } from "react-icons/lia";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
 
 function Post({ post }) {
+  const { user } = useSelector((state: RootState) => state.user);
+  const [liked, setLiked] = useState(false);
   const [owner, setOwner] = useState(null);
   const [likedCount, setLikeCount] = useState(post.likes.length);
+
+  useEffect(() => {
+    const userLiked = post.likes.some(
+      (like) => like._id.toLowerCase() === user._id.toLowerCase()
+    );
+    setLiked(userLiked);
+  }, [post.likes]);
+
   useEffect(() => {
     const fetchOwner = async () => {
       try {
@@ -38,29 +50,69 @@ function Post({ post }) {
           withCredentials: true,
         }
       );
+      setLiked(!liked);
       setLikeCount(res.data.updatedLikesCount);
     } catch (error) {
       console.log(error);
     }
   };
 
+  function formatTimeDifference(timestamp) {
+    const now = new Date();
+    const createdAt = new Date(timestamp);
+
+    const timeDifference = now - createdAt;
+    const seconds = Math.floor(timeDifference / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+    const months = Math.floor(days / 30);
+    const years = Math.floor(months / 12);
+
+    if (seconds < 60) {
+      return `${seconds} secs`;
+    } else if (minutes < 60) {
+      return `${minutes} mins`;
+    } else if (hours < 24) {
+      return `${hours} hrs`;
+    } else if (days < 30) {
+      return `${days} days`;
+    } else if (months < 12) {
+      return `${months} months`;
+    } else {
+      return `${years} years`;
+    }
+  }
+
   return (
-    <div className="w-screen flex flex-col p-3 text-md border-b-slate-400 border-b-1">
+    <div className="w-screen flex flex-col p-2 text-md border-b-slate-400 border-b-1">
       <div className="w-full flex flex-row items-start">
         <img
           className="w-8 h-8 rounded-full mt-3"
           src={owner && owner.avtar.url}
           alt="profile-pic"
         />
-        <div className="w-full flex flex-col border-3 ml-3">
-          <div className="font-bold my-2 text-md">{owner && owner.name}</div>
+        <div className="w-full flex flex-col ml-3">
+          <div className="font-bold my-2 text-md flex items-baseline">
+            <p>{owner && owner.name}</p>
+            <p className="font-thin text-xs ml-auto text-slate-200">
+              {formatTimeDifference(post.createdAt)}
+            </p>
+          </div>
           <div className="text-sm">{post.caption}</div>
-          <div className="w-full flex flex-row mx-2 justify-around mt-6 mb-1">
+          <div className="w-full flex flex-row mx-2 justify-around mt-2 mb-1">
             <div className="w-full flex items-center">
-              <MdFavoriteBorder
-                className="text-xl text-white opacity-80"
-                onClick={handleLike}
-              />
+              {liked ? (
+                <MdFavorite
+                  className="text-xl text-orange-500 transition-opacity duration-300"
+                  onClick={handleLike}
+                />
+              ) : (
+                <MdFavoriteBorder
+                  className="text-xl text-white opacity-80 transition-opacity duration-300"
+                  onClick={handleLike}
+                />
+              )}
               <p className="text-xs ml-3 text-orange-200">{likedCount} </p>
             </div>
             <div className="w-full flex items-center">

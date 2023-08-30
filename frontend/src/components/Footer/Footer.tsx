@@ -23,14 +23,14 @@ function Footer() {
 
   return (
     <>
-      <div className="fixed bottom-0 w-full flex flex-col text-white ">
+      <div className="fixed bottom-0 w-full flex flex-col text-white">
         <div
           className="w-12 h-12 flex items-center justify-center bg-orange-400 rounded-3xl my-2 ml-auto shadow-3xl shadow-white mx-5 my-8"
           onClick={toggleTweetForm}
         >
           <TbCodePlus className="text-3xl" />
         </div>
-        <div className="w-[100%] h-14 flex flex-row justify-around items-center">
+        <div className="w-[100%] h-14 flex flex-row justify-around items-center bg-black">
           <div className="w-full flex justify-center text-xl font-semibold my-3">
             <BiHomeSmile
               className="text-2xl"

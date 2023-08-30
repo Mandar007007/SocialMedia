@@ -17,13 +17,9 @@ function Menu() {
 
   return (
     <>
-      <div className="w-full flex flex-col  items-center">
-        <div className="flex flex-row bg-black text-white justify-center items-center relative pt-2">
-          <button
-            className="mr-auto ml-5 fixed sm:hidden left-0"
-            title="Menu"
-            onClick={toggleMenu}
-          >
+      <div className="w-full flex flex-col items-center">
+        <div className="flex w-screen bg-black  text-white pt-2">
+          <button className="sm:hidden ml-2" title="Menu" onClick={toggleMenu}>
             <FaBars className="text-white text-2xl" />
           </button>
           <img
@@ -63,7 +59,7 @@ function Menu() {
         >
           <motion.div className="h-screen w-5/6 mr-auto flex flex-col shadow-2xl shadow-white bg-black text-white py-5 px-4">
             <img
-              className="w-16 h-16 rounded-full border-1 border-orange-400 my-2"
+              className="w-16 h-16 rounded-full border-1 my-2"
               src={user.avtar.url}
               alt="profile-pic"
             />
