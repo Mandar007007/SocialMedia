@@ -5,8 +5,10 @@ import axios, { AxiosError } from "axios";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
+import ErrorResponseData from "../../interfaces/ErrorResponseData";
+import TweetProps from "../../interfaces/TweetProps";
 
-function TweetForm({ closeTweetForm }) {
+function TweetForm({ closeTweetForm }: TweetProps) {
   const { user } = useSelector((state: RootState) => state.user);
   const [formData, setFormData] = useState({
     caption: "",
@@ -17,23 +19,15 @@ function TweetForm({ closeTweetForm }) {
       setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
     }
   };
-  interface ErrorResponseData {
-    msg?: string;
-    message?: string;
-  }
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      const response = await axios.post(
-        "http://localhost:4000/api/v1/post/upload",
-        formData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-          withCredentials: true,
-        }
-      );
+      await axios.post("http://localhost:4000/api/v1/post/upload", formData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      });
       closeTweetForm();
     } catch (error) {
       const err = error as AxiosError<ErrorResponseData>;

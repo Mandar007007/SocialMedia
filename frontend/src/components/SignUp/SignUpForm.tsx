@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { LeftToRight } from "../../other/motionVariants";
+import ErrorResponseData from "../../interfaces/ErrorResponseData";
 
 function SignUpForm() {
   const dispatch = useDispatch();
@@ -15,13 +16,12 @@ function SignUpForm() {
     name: "",
     email: "",
     password: "",
-    avtar:null
-
+    avtar: null,
   });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, files } = event.target;
-  
+
     if (files) {
       setFormData((prevFormData) => ({
         ...prevFormData,
@@ -34,12 +34,6 @@ function SignUpForm() {
       }));
     }
   };
-  
-
-  interface ErrorResponseData {
-    msg?: string;
-    message?: string;
-  }
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

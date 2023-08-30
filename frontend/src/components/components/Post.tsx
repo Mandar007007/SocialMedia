@@ -5,11 +5,13 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
+import formatTimeDifference from "../../functions/formatTimeDifference";
+import { IPost, IUser } from "../../interfaces/Model";
 
-function Post({ post }) {
+function Post({ post }: { post: IPost }) {
   const { user } = useSelector((state: RootState) => state.user);
-  const [liked, setLiked] = useState(false);
-  const [owner, setOwner] = useState(null);
+  const [liked, setLiked] = useState<boolean>(false);
+  const [owner, setOwner] = useState<IUser | null>(null);
   const [likedCount, setLikeCount] = useState(post.likes.length);
 
   useEffect(() => {
@@ -57,39 +59,12 @@ function Post({ post }) {
     }
   };
 
-  function formatTimeDifference(timestamp) {
-    const now = new Date();
-    const createdAt = new Date(timestamp);
-
-    const timeDifference = now - createdAt;
-    const seconds = Math.floor(timeDifference / 1000);
-    const minutes = Math.floor(seconds / 60);
-    const hours = Math.floor(minutes / 60);
-    const days = Math.floor(hours / 24);
-    const months = Math.floor(days / 30);
-    const years = Math.floor(months / 12);
-
-    if (seconds < 60) {
-      return `${seconds} secs`;
-    } else if (minutes < 60) {
-      return `${minutes} mins`;
-    } else if (hours < 24) {
-      return `${hours} hrs`;
-    } else if (days < 30) {
-      return `${days} days`;
-    } else if (months < 12) {
-      return `${months} months`;
-    } else {
-      return `${years} years`;
-    }
-  }
-
   return (
     <div className="w-screen flex flex-col p-2 text-md border-b-slate-400 border-b-1">
       <div className="w-full flex flex-row items-start">
         <img
           className="w-8 h-8 rounded-full mt-3"
-          src={owner && owner.avtar.url}
+          src={owner?.avtar?.url || "fallback-url"}
           alt="profile-pic"
         />
         <div className="w-full flex flex-col ml-3">
