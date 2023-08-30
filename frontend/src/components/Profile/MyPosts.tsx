@@ -1,13 +1,10 @@
 import Post from "../components/Post";
 import axios, { AxiosError } from "axios";
 import { useEffect, useState } from "react";
+import ErrorResponseData from "../../interfaces/ErrorResponseData";
+import { IPost } from "../../interfaces/Model";
 
 function MyPosts() {
-  interface ErrorResponseData {
-    msg?: string;
-    message?: string;
-  }
-
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
@@ -32,11 +29,10 @@ function MyPosts() {
   return (
     <>
       <div>
-        {posts.map((post) => (
+        {posts.map((post: IPost) => (
           <Post key={post._id} post={post} />
         ))}
       </div>
-      
     </>
   );
 }

@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { RightToLeft } from "../../other/motionVariants";
+import ErrorResponseData from "../../interfaces/ErrorResponseData";
 
 function LoginForm() {
   const dispatch = useDispatch();
@@ -18,10 +19,7 @@ function LoginForm() {
     const { name, value } = event.target;
     setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
   };
-  interface ErrorResponseData {
-    msg?: string;
-    message?: string;
-  }
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
