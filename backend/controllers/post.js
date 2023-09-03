@@ -1,14 +1,28 @@
 const Post = require("../models/Post")
 const User = require("../models/User")
+const cloudinary = require('cloudinary').v2
+
+cloudinary.config({
+  cloud_name: 'dxggp2ecx',
+  api_key: '755829262882474',
+  api_secret: '7T3NB1Xl96OGUiCDLNRX_NuV3p0'
+})
 
 exports.createPost = async (req, res) => {
   try {
+    const file = req.files.image
+    let url = "",public_id = ""
+
+    await cloudinary.uploader.upload(file.tempFilePath, (err, result) => {
+      url = result.url
+      public_id = result.public_id
+    })
 
     const newPostData = {
       caption: req.body.caption,
       image: {
-        public_id: "sample id",
-        url: "sample url"
+        public_id: public_id,
+        url: url
       },
       owner: req.user._id
     }
