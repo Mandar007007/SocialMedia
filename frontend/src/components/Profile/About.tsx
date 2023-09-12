@@ -3,10 +3,17 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 import { BiLeftArrow } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { EditForm } from "./EditForm";
 
 function About() {
+  const [editForm, openEditForm] = useState(false);
   const navigate = useNavigate();
   const { user } = useSelector((state: RootState) => state.user);
+
+  const handleClick = () => {
+    openEditForm(!editForm);
+  };
 
   return (
     <>
@@ -26,6 +33,7 @@ function About() {
           <button
             className="border-slate-400 text-slate-300 border-2 absolute -bottom-11 right-2 p-1 px-2 rounded-3xl"
             title="Close Login"
+            onClick={handleClick}
           >
             Edit Profiles
           </button>
@@ -52,6 +60,7 @@ function About() {
           </div>
         </div>
       </div>
+      {editForm && <EditForm />}
     </>
   );
 }

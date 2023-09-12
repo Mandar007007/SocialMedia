@@ -11,12 +11,16 @@ import ErrorResponseData from "../../interfaces/ErrorResponseData";
 function SignUpForm() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [selectedImage, setSelectedImage] = useState(
+    "https://i.pinimg.com/564x/e9/67/b6/e967b6e4219c0e895260d99e80bca317.jpg"
+  );
 
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
-    avtar: null,
+    avtar:
+      "https://i.pinimg.com/564x/e9/67/b6/e967b6e4219c0e895260d99e80bca317.jpg",
   });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,6 +36,11 @@ function SignUpForm() {
         ...prevFormData,
         [name]: value,
       }));
+    }
+    const imageFile = event.target.files[0];
+    if (imageFile) {
+      const imageUrl = URL.createObjectURL(imageFile);
+      setSelectedImage(imageUrl);
     }
   };
 
@@ -73,6 +82,32 @@ function SignUpForm() {
         method="POST"
         className="flex flex-col mt-5 text-left text-base"
       >
+        <motion.div className="flex column w-full center items-center justify-center">
+          <label
+            htmlFor="avatar"
+            className="w-20 h-20 rounded-full border-2 border-orange-200 flex justify-center items-center truncate relative sm:w-24 sm:h-20"
+          >
+            <img src={selectedImage} alt="w-full h-full bg-cover absolute" />
+          </label>
+          <input
+            type="file"
+            id="avatar"
+            name="avtar"
+            accept="image/*"
+            onChange={handleChange}
+            aria-labelledby="avatar"
+            className={`
+            my-3 ml-3  w-full text-sm text-slate-500 
+            file:w-20 file:h-20
+            file:mr-4 file:py-2 file:px-4
+            file:rounded-full file:border-0
+            file:text-sm file:font-semibold
+            file:bg-orange-50 file:text-black
+            hover:file:bg-orange-100
+            file:bg-center file:bg-cover file:bg-no-repeat
+          `}
+          />
+        </motion.div>
         <motion.label htmlFor="name" className="my-3">
           Name:
         </motion.label>
@@ -101,19 +136,7 @@ function SignUpForm() {
           className="my-3 border-b-2 bg-transparent border-gray-400 focus:outline-none focus:border-slate-600 focus:invalid:border-pink-600 invalid:border-pink-600
  appearance-none"
         />
-        <motion.label htmlFor="email" className="my-3">
-          Avtar:
-        </motion.label>
-        <motion.input
-          variants={LeftToRight}
-          type="file"
-          name="avtar"
-          id="avtar"
-          onChange={handleChange}
-          aria-labelledby="avtar"
-          className="my-3 border-b-2 bg-transparent border-gray-400 focus:outline-none focus:border-slate-600 focus:invalid:border-pink-600 invalid:border-pink-600
- appearance-none"
-        />
+
         <motion.label htmlFor="password" className="my-3">
           Password:
         </motion.label>

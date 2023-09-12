@@ -6,7 +6,7 @@ import SignUpProps from "../../interfaces/SignUpProps";
 
 function Signup({ closeSignup }: SignUpProps) {
   return (
-    <motion.div className="flex flex-col h-[100%] w-[100%] bg-black text-white p-8 sm:rounded-3xl sm:w-[50%]">
+    <motion.div className="flex flex-col h-[100%] w-[100%] bg-black text-white p-8 sm:rounded-3xl sm:w-[50%] sm:h-auto sm:py-2">
       <div className="flex items-center justify-between w-full">
         <button className="mr-auto" title="Close Login" onClick={closeSignup}>
           <IoMdClose className="text-2xl sm:text-4xl" />
@@ -19,7 +19,7 @@ function Signup({ closeSignup }: SignUpProps) {
           />
         </div>
       </div>
-      <div className="my-10 text-3xl font-black">
+      <div className="mt-10 text-3xl font-black">
         <p>Create your account</p>
         <SignUpForm />
       </div>

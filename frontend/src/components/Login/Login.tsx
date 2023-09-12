@@ -4,9 +4,9 @@ import LoginForm from "./LoginForm";
 import { IoMdClose } from "react-icons/io";
 import LoginProps from "../../interfaces/LogInProps";
 
-function Login({ closeLogin } : LoginProps) {
+function Login({ closeLogin }: LoginProps) {
   return (
-    <motion.div className="flex flex-col h-[100%] w-[100%] bg-black text-white p-8  sm:rounded-3xl sm:w-[50%]">
+    <motion.div className="flex flex-col h-[100%] w-[100%] bg-black text-white p-8 sm:rounded-3xl sm:w-[50%] sm:h-auto sm:py-2">
       <div className="flex items-center justify-between w-full">
         <button className="mr-auto" title="Close Login" onClick={closeLogin}>
           <IoMdClose className="text-2xl sm:text-4xl" />
