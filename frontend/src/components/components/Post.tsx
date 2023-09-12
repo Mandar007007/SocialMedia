@@ -16,7 +16,7 @@ function Post({ post }: { post: IPost }) {
 
   useEffect(() => {
     const userLiked = post.likes.some(
-      (like) => like._id.toLowerCase() === user._id.toLowerCase()
+      (like) => like._id.toLowerCase() === (user && user._id.toLowerCase())
     );
     setLiked(userLiked);
   }, [post.likes]);

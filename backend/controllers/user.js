@@ -165,6 +165,7 @@ exports.updatePassword = async (req, res) => {
 
 
 exports.updateProfile = async (req, res) => {
+  console.log("In updateProfile")
   try {
     const user = await User.findById(req.user._id)
     const { name, email } = req.body
