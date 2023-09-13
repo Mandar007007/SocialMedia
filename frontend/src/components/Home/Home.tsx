@@ -8,9 +8,9 @@ function Home() {
   const { user } = useSelector((state: RootState) => state.user);
   return (
     <>
-      <div className="w-screen sm:flex z-20 text-white sm:my-6 sm:mx-18 text-white">
+      <div className="w-screen sm:flex z-20 text-white sm:my-6 sm:mx-18">
         <div className="sm:basis-2/6 ">{user && <Menu />}</div>
-        <div className="sm:basis-3/6 ">
+        <div className="sm:basis-4/6 ">
           <Feed />
         </div>
         {/* <div className="sm:basis-2/6">Explore</div> */}

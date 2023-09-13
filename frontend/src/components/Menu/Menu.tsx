@@ -17,7 +17,7 @@ function Menu() {
 
   return (
     <>
-      <div className="w-full flex flex-col items-center">
+      <div className="w-screen flex flex-col items-center sm:w-[50%]">
         <div className="flex w-screen bg-black  text-white pt-2">
           <button className="sm:hidden ml-2" title="Menu" onClick={toggleMenu}>
             <FaBars className="text-white text-2xl" />
@@ -28,7 +28,7 @@ function Menu() {
             alt=""
           />
         </div>
-        {/* <div className="flex flex-col bg-black text-white sm:block -z-20 sm:z-30">
+        <div className="sm:flex-col bg-black text-white sm:block -z-20 hidden sm:z-30">
           <div className="font-bold text-3xl mt-5">{user.name}</div>
           <div className="font-normal text-md opacity-75 mt-3 tracking-wider">
             #{user.email}
@@ -44,7 +44,7 @@ function Menu() {
             </div>
           </div>
           <Items />
-        </div> */}
+        </div>
         <motion.div
           ref={slidingMenuRef}
           initial={{ x: "-100%", visibility: "hidden" }}
