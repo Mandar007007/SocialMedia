@@ -19,22 +19,21 @@ export function EditForm() {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, files } = event.target;
+
     if (files) {
       setFormData((prevFormData) => ({
         ...prevFormData,
         [name]: files[0],
       }));
+
+      const imageFile = files[0];
+      const imageUrl = URL.createObjectURL(imageFile);
+      setSelectedImage(imageUrl);
     } else {
       setFormData((prevFormData) => ({
         ...prevFormData,
         [name]: value,
       }));
-    }
-
-    const imageFile = event.target.files[0];
-    if (imageFile) {
-      const imageUrl = URL.createObjectURL(imageFile);
-      setSelectedImage(imageUrl);
     }
   };
 
@@ -54,6 +53,8 @@ export function EditForm() {
       dispatch({ type: "SET_USER", payload: userData });
       navigate("/profile");
     } catch (error) {
+      console.error("Error in handleSubmit:", error);
+
       const err = error as AxiosError<ErrorResponseData>;
       let message = "Error in the update.";
 
@@ -67,6 +68,7 @@ export function EditForm() {
       toast.error(message);
     }
   };
+
   return (
     <div className="h-screen w-screen absolute top-0 left-0 bg-black text-white z-10">
       <div className="flex column h-full w-full center items-center justify-center">
