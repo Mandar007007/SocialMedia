@@ -31,16 +31,15 @@ function SignUpForm() {
         ...prevFormData,
         [name]: files[0],
       }));
+
+      const imageFile = files[0];
+      const imageUrl = URL.createObjectURL(imageFile);
+      setSelectedImage(imageUrl);
     } else {
       setFormData((prevFormData) => ({
         ...prevFormData,
         [name]: value,
       }));
-    }
-    const imageFile = event.target.files[0];
-    if (imageFile) {
-      const imageUrl = URL.createObjectURL(imageFile);
-      setSelectedImage(imageUrl);
     }
   };
 
@@ -85,7 +84,7 @@ function SignUpForm() {
         <motion.div className="flex column w-full center items-center justify-center">
           <label
             htmlFor="avatar"
-            className="w-20 h-20 rounded-full border-2 border-orange-200 flex justify-center items-center truncate relative sm:w-24 sm:h-20"
+            className="w-20 h-20 rounded-full border-2 border-orange-200 flex justify-center items-center truncate relative sm:w-24 sm:h-24"
           >
             <img src={selectedImage} alt="w-full h-full bg-cover absolute" />
           </label>
@@ -97,7 +96,7 @@ function SignUpForm() {
             onChange={handleChange}
             aria-labelledby="avatar"
             className={`
-            my-3 ml-3  w-full text-sm text-slate-500 
+            my-3 ml-3 hidden w-full text-sm text-slate-500 
             file:w-20 file:h-20
             file:mr-4 file:py-2 file:px-4
             file:rounded-full file:border-0

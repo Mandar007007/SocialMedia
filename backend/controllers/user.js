@@ -27,8 +27,10 @@ exports.register = async (req, res) => {
     if (user) return res.status(500).json({ success: false, msg: "User already exists" });
 
     user = await User.create({ name, email, password, avtar: { public_id: public_id, url: url } });
+    console.log(user);
 
     const token = await user.generateToken();
+    console.log(token)
 
     res.status(200).cookie("token", token, { expires: new Date(Date.now() + 1 * 24 * 60 * 60 * 1000), httpOnly: true }).json({
       success: true,
@@ -36,6 +38,7 @@ exports.register = async (req, res) => {
       token
     })
   } catch (e) {
+    console.error('Error during registration:', e);
     res.status(500).json({
       success: false,
       message: e.message,

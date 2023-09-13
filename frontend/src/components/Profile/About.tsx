@@ -5,6 +5,8 @@ import { BiLeftArrow } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { EditForm } from "./EditForm";
+import { ToastContainer } from "react-toastify";
+import { contextClass } from "../../other/customToaster";
 
 function About() {
   const [editForm, openEditForm] = useState(false);
@@ -61,6 +63,15 @@ function About() {
         </div>
       </div>
       {editForm && <EditForm />}
+      <ToastContainer
+        toastClassName={({ type }) =>
+          contextClass[type || "default"] +
+          " relative flex p-1 min-h-10 rounded justify-between overflow-hidden cursor-pointer opacity-90"
+        }
+        bodyClassName={() =>
+          "text-sm font-semibold text-black font-med block p-3"
+        }
+      />
     </>
   );
 }
