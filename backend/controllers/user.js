@@ -384,3 +384,27 @@ exports.getUser = async (req, res) => {
     })
   }
 }
+
+exports.searchUser = async (req, res) => {
+  try {
+    const { name } = req.body;
+
+    const regex = new RegExp(name, 'i');
+    const users = await User.find({ name: regex });
+
+    res.json({
+      success: true,
+      users,
+    });
+  } catch (e) {
+    res.json({
+      success: false,
+      error: e.message,
+    });
+  }
+};
+
+
+
+
+
