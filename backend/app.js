@@ -14,7 +14,7 @@ app.use(cors({
   credentials: true,
 }));
 app.use(fileUpload({
-  useTempFiles:true
+  useTempFiles:true,
 }))
 
 //routes

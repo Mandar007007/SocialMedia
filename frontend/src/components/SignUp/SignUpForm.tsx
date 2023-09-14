@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { LeftToRight } from "../../other/motionVariants";
 import ErrorResponseData from "../../interfaces/ErrorResponseData";
+import { GiPreviousButton } from "react-icons/gi";
 
 function SignUpForm() {
   const dispatch = useDispatch();
@@ -19,20 +20,21 @@ function SignUpForm() {
     name: "",
     email: "",
     password: "",
-    avtar:
-      "https://i.pinimg.com/564x/e9/67/b6/e967b6e4219c0e895260d99e80bca317.jpg",
+    avtar:null,
   });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, files } = event.target;
-
-    if (files) {
+  
+    if (name === "avtar" && files && files[0]) {
+      const imageFile = files[0];
+  
+      // Use the updater function to ensure the state update is based on the previous state
       setFormData((prevFormData) => ({
         ...prevFormData,
-        [name]: files[0],
+        [name]: imageFile,
       }));
-
-      const imageFile = files[0];
+  
       const imageUrl = URL.createObjectURL(imageFile);
       setSelectedImage(imageUrl);
     } else {
@@ -43,36 +45,40 @@ function SignUpForm() {
     }
   };
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  event.preventDefault();
 
-    try {
-      const response = await axios.post(
-        "http://localhost:4000/api/v1/register",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-      const userData = response.data.user;
-      dispatch({ type: "SET_USER", payload: userData });
-      navigate("/home");
-    } catch (error) {
-      const err = error as AxiosError<ErrorResponseData>;
-      let message = "An error occurred during signup.";
+  try {
+    console.log("formData before submit:", formData); 
 
-      if (err.response && err.response.data) {
-        if (err.response.data.msg) {
-          message = err.response.data.msg;
-        } else if (err.response.data.message) {
-          message = err.response.data.message;
-        }
+    const response = await axios.post(
+      "http://localhost:4000/api/v1/register",
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        withCredentials: true,
       }
-      toast.error(message);
+    );
+
+    const userData = response.data.user;
+    dispatch({ type: "SET_USER", payload: userData });
+    navigate("/home");
+  } catch (error) {
+    const err = error as AxiosError<ErrorResponseData>;
+    let message = "An error occurred during signup.";
+
+    if (err.response && err.response.data) {
+      if (err.response.data.msg) {
+        message = err.response.data.msg;
+      } else if (err.response.data.message) {
+        message = err.response.data.message;
+      }
     }
-  };
+    toast.error(message);
+  }
+};
   return (
     <>
       <form
@@ -80,6 +86,7 @@ function SignUpForm() {
         action=""
         method="POST"
         className="flex flex-col mt-5 text-left text-base"
+        encType="multipart/form-data"
       >
         <motion.div className="flex column w-full center items-center justify-center">
           <label
@@ -88,24 +95,16 @@ function SignUpForm() {
           >
             <img src={selectedImage} alt="w-full h-full bg-cover absolute" />
           </label>
-          <input
-            type="file"
-            id="avatar"
-            name="avtar"
-            accept="image/*"
-            onChange={handleChange}
-            aria-labelledby="avatar"
-            className={`
-            my-3 ml-3 hidden w-full text-sm text-slate-500 
-            file:w-20 file:h-20
-            file:mr-4 file:py-2 file:px-4
-            file:rounded-full file:border-0
-            file:text-sm file:font-semibold
-            file:bg-orange-50 file:text-black
-            hover:file:bg-orange-100
-            file:bg-center file:bg-cover file:bg-no-repeat
-          `}
-          />
+          <motion.input
+          variants={LeftToRight}
+          type="file"
+          name="avtar"
+          id="avtar"
+          onChange={handleChange}
+          aria-labelledby="avtar"
+          className="my-3 border-b-2 bg-transparent border-gray-400 focus:outline-none focus:border-slate-600 focus:invalid:border-pink-600 invalid:border-pink-600
+ appearance-none"
+        />
         </motion.div>
         <motion.label htmlFor="name" className="my-3">
           Name:
