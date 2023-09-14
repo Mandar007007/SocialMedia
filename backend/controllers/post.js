@@ -10,13 +10,13 @@ cloudinary.config({
 
 exports.createPost = async (req, res) => {
   try {
-    const file = req.files.image
-    let url = "",public_id = ""
+    // const file = req.files.image
+    let url = "", public_id = ""
 
-    await cloudinary.uploader.upload(file.tempFilePath, (err, result) => {
-      url = result.url
-      public_id = result.public_id
-    })
+    // await cloudinary.uploader.upload(file.tempFilePath, (err, result) => {
+    //   url = result.url
+    //   public_id = result.public_id
+    // })
 
     const newPostData = {
       caption: req.body.caption,

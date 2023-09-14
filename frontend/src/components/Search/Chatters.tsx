@@ -1,6 +1,6 @@
 import axios, { AxiosError } from "axios";
 import { useEffect, useState } from "react";
-import ErrorResponseData from "../interfaces/ErrorResponseData";
+import ErrorResponseData from "../../interfaces/ErrorResponseData";
 import { toast } from "react-toastify";
 
 function Chatters() {

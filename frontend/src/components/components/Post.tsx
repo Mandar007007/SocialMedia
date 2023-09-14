@@ -60,7 +60,7 @@ function Post({ post }: { post: IPost }) {
   };
 
   return (
-    <div className="w-screen flex flex-col p-2 text-md border-b-slate-400 border-b-1">
+    <div className="w-full flex flex-col p-2 text-md border-b-slate-400 border-b-1">
       <div className="w-full flex flex-row items-start">
         <img
           className="w-8 h-8 rounded-full mt-3"

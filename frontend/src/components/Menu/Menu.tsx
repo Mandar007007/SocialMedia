@@ -2,12 +2,9 @@ import { FaBars } from "react-icons/fa";
 import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import Items from "./Items";
-import { useSelector } from "react-redux";
-import { RootState } from "../../store";
+import UserDetails from "./UserDetails";
 
 function Menu() {
-  const { user } = useSelector((state: RootState) => state.user);
-
   const slidingMenuRef = useRef(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -17,9 +14,9 @@ function Menu() {
 
   return (
     <>
-      <div className="w-screen flex flex-col items-center sm:w-[50%]">
-        <div className="flex w-screen bg-black  text-white pt-2">
-          <button className="sm:hidden ml-2" title="Menu" onClick={toggleMenu}>
+      <div className="w-full flex flex-col items-center">
+        <div className="flex w-full bg-black text-white pt-2">
+          <button className="ml-2" title="Menu" onClick={toggleMenu}>
             <FaBars className="text-white text-2xl" />
           </button>
           <img
@@ -27,23 +24,6 @@ function Menu() {
             src="/images/logo.svg"
             alt=""
           />
-        </div>
-        <div className="sm:flex-col bg-black text-white sm:block -z-20 hidden sm:z-30">
-          <div className="font-bold text-3xl mt-5">{user.name}</div>
-          <div className="font-normal text-md opacity-75 mt-3 tracking-wider">
-            #{user.email}
-          </div>
-          <div className="flex flex-row mt-5">
-            <div className="flex flex-row basis-1/2">
-              <p className="mr-2 font-bold">{user.followers.length}</p>
-              <p className="mr-1 font-normal opacity-75">followers</p>
-            </div>
-            <div className="flex flex-row basis-1/2">
-              <p className="mr-2 font-bold">{user.following.length}</p>
-              <p className="mr-1 font-normal opacity-75">following</p>
-            </div>
-          </div>
-          <Items />
         </div>
         <motion.div
           ref={slidingMenuRef}
@@ -55,28 +35,10 @@ function Menu() {
           exit={{ x: 0 }}
           transition={{ duration: 0.3 }}
           onClick={toggleMenu}
-          className="h-screen w-screen fixed top-0 right-0 z-10"
+          className="h-screen w-screen fixed top-0 right-0 z-40"
         >
           <motion.div className="h-screen w-5/6 mr-auto flex flex-col shadow-2xl shadow-white bg-black text-white py-5 px-4">
-            <img
-              className="w-16 h-16 rounded-full border-1 my-2"
-              src={user.avtar.url}
-              alt="profile-pic"
-            />
-            <div className="font-bold text-xl mt-2">{user.name}</div>
-            <div className="font-normal text-xs opacity-75 mt-3 tracking-wider">
-              @{user.email}
-            </div>
-            <div className="flex flex-row w-[75%] mt-5">
-              <div className="flex flex-row basis-1/2">
-                <p className="mr-2 font-bold">{user.followers.length}</p>
-                <p className="mr-1 font-thin opacity-75">followers</p>
-              </div>
-              <div className="flex flex-row basis-1/2">
-                <p className="mr-2 font-bold">{user.following.length}</p>
-                <p className="mr-1 font-thin opacity-75">following</p>
-              </div>
-            </div>
+            <UserDetails />
             <Items />
           </motion.div>
         </motion.div>

@@ -32,6 +32,7 @@ function App() {
   useEffect(() => {
     loadUser();
   }, []);
+
   return (
     <Router>
       <Routes>

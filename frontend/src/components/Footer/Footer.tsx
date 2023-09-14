@@ -52,7 +52,7 @@ function Footer() {
       {/*  Mobile */}
       <motion.div
         ref={tweetFormModalRef}
-        className="h-screen w-screen fixed top-0 right-0 z-20 bg-slate-50/25 sm:p-60 sm:hidden"
+        className="h-screen w-screen fixed top-0 right-0 z-40 bg-slate-50/25 sm:p-60 sm:hidden"
         initial={{ y: "100%", visibility: "hidden" }}
         animate={{
           y: isTweetFormOpen ? "0%" : "100%",
