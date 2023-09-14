@@ -3,9 +3,9 @@ const User = require("../models/User")
 const cloudinary = require('cloudinary').v2
 
 cloudinary.config({
-  cloud_name: 'dxggp2ecx',
-  api_key: '755829262882474',
-  api_secret: '7T3NB1Xl96OGUiCDLNRX_NuV3p0'
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
 })
 
 exports.createPost = async (req, res) => {

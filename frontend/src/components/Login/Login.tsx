@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import LoginForm from "./LoginForm";
 import { IoMdClose } from "react-icons/io";
 import LoginProps from "../../interfaces/LogInProps";
+import ResetPassword from "./ResetPassword";
 
 function Login({ closeLogin }: LoginProps) {
   return (
@@ -24,6 +25,9 @@ function Login({ closeLogin }: LoginProps) {
         <p>Welcome back</p>
         <LoginForm />
       </div>
+      <div className="mt-10 text-3xl font-black">
+        <ResetPassword />
+        </div>
     </motion.div>
   );
 }

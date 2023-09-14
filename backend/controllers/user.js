@@ -5,9 +5,9 @@ const crypto = require("crypto")
 const cloudinary = require('cloudinary').v2
 
 cloudinary.config({
-  cloud_name: 'dxggp2ecx',
-  api_key: '755829262882474',
-  api_secret: '7T3NB1Xl96OGUiCDLNRX_NuV3p0'
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
 })
 
 
@@ -19,7 +19,6 @@ exports.register = async (req, res) => {
 
     await cloudinary.uploader.upload(file.tempFilePath, (err, result) => {
       if(err) console.log(err)
-      console.log(result)
       url = result.url
       public_id = result.public_id
     })
@@ -32,7 +31,6 @@ exports.register = async (req, res) => {
     console.log(user);
 
     const token = await user.generateToken();
-    console.log(token)
 
     res.status(200).cookie("token", token, { expires: new Date(Date.now() + 1 * 24 * 60 * 60 * 1000), httpOnly: true }).json({
       success: true,
@@ -273,6 +271,7 @@ exports.myProfile = async (req, res) => {
 
 exports.forgotPassword = async (req, res) => {
   try {
+    console.log("fp");
 
     const user = await User.findOne({ email: req.body.email })
 
