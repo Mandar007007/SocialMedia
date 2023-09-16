@@ -9,22 +9,24 @@ import { toast } from "react-toastify";
 export function EditForm() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { user } = useSelector((state: RootState) => state.user);
+  const { user } = useSelector((state: RootState) => state.user); 
   const [formData, setFormData] = useState({
     name: user.name,
     email: user.email,
-    avtar: user.avtar.url,
+    avtar: null,
   });
+
   const [selectedImage, setSelectedImage] = useState(user.avtar.url);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, files } = event.target;
-
+    
     if (files) {
       setFormData((prevFormData) => ({
         ...prevFormData,
         [name]: files[0],
       }));
+      
 
       const imageFile = files[0];
       const imageUrl = URL.createObjectURL(imageFile);
@@ -40,20 +42,22 @@ export function EditForm() {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      const response = await axios.post(
+      const response = await axios.put(
         "http://localhost:4000/api/v1/update/profile",
         formData,
         {
           headers: {
             "Content-Type": "multipart/form-data",
           },
+          withCredentials:true
         }
       );
       const userData = response.data.user;
+        console.log(response)
       dispatch({ type: "SET_USER", payload: userData });
       navigate("/profile");
     } catch (error) {
-      console.error("Error in handleSubmit:", error);
+      console.error("Error in raajat:", error.message);
 
       const err = error as AxiosError<ErrorResponseData>;
       let message = "Error in the update.";
