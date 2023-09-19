@@ -10,13 +10,13 @@ cloudinary.config({
 
 exports.createPost = async (req, res) => {
   try {
-    const file = req.files.image
-    let url = "",public_id = ""
+    // const file = req.files.image
+    let url = "", public_id = ""
 
-    await cloudinary.uploader.upload(file.tempFilePath, (err, result) => {
-      url = result.url
-      public_id = result.public_id
-    })
+    // await cloudinary.uploader.upload(file.tempFilePath, (err, result) => {
+    //   url = result.url
+    //   public_id = result.public_id
+    // })
 
     const newPostData = {
       caption: req.body.caption,
@@ -197,6 +197,7 @@ exports.commentOnPost = async (req, res, next) => {
       })
 
     } else {
+
       post.comments.push({
         user: req.user._id,
         comment: req.body.comment,
@@ -209,7 +210,6 @@ exports.commentOnPost = async (req, res, next) => {
       success: true,
       message: "Post Saved"
     })
-
 
   } catch (e) {
     res.status(500).json({

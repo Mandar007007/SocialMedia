@@ -42,7 +42,7 @@ function FollowingFeed() {
   }, []);
 
   return (
-    <div>
+    <div className="px-1 sm:px-4">
       {posts.map((post: IPost) => (
         <Post key={post._id} post={post} />
       ))}

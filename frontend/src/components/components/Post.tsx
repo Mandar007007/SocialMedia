@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 import formatTimeDifference from "../../functions/formatTimeDifference";
 import { IPost, IUser } from "../../interfaces/Model";
+import Comment from "../Comment/Comment";
 
 function Post({ post }: { post: IPost }) {
   const { user } = useSelector((state: RootState) => state.user);
@@ -60,51 +61,58 @@ function Post({ post }: { post: IPost }) {
   };
 
   return (
-    <div className="w-screen flex flex-col p-2 text-md border-b-slate-400 border-b-1">
-      <div className="w-full flex flex-row items-start">
-        <img
-          className="w-8 h-8 rounded-full mt-3"
-          src={owner?.avtar?.url || "fallback-url"}
-          alt="profile-pic"
-        />
-        <div className="w-full flex flex-col ml-3">
-          <div className="font-bold my-2 text-md flex items-baseline">
-            <p>{owner && owner.name}</p>
-            <p className="font-thin text-xs ml-auto text-slate-200">
-              {formatTimeDifference(post.createdAt)}
-            </p>
+    <>
+      <div className="w-full rounded-lg shadow-sm text-xl my-8 border-3 border-slate-900  sm:my-8">
+        <div className="h-12 border-b-2 py-4 border-slate-800 flex flex-row items-center px-4">
+          <img
+            src={owner?.avtar?.url || "fallback-url"}
+            className="h-8 w-8 bg-slate-400 rounded-full"
+            alt="profile-pic"
+          />
+
+          <div className="text-md mx-3 text-white font-bold">
+            {owner && owner.name}
           </div>
-          <div className="text-sm">{post.caption}</div>
-          <div className="w-full flex flex-row mx-2 justify-around mt-2 mb-1">
-            <div className="w-full flex items-center">
-              {liked ? (
-                <MdFavorite
-                  className="text-xl text-orange-500 transition-opacity duration-300"
-                  onClick={handleLike}
-                />
-              ) : (
-                <MdFavoriteBorder
-                  className="text-xl text-white opacity-80 transition-opacity duration-300"
-                  onClick={handleLike}
-                />
-              )}
-              <p className="text-xs ml-3 text-orange-200">{likedCount} </p>
-            </div>
-            <div className="w-full flex items-center">
-              <BsChat className="text-xl text-white opacity-80" />
-              <p className="text-xs ml-3 text-orange-200">
-                {post.comments.length}
-              </p>
-            </div>
-            <div className="w-full flex items-center">
-              <LiaBookmarkSolid className="text-xl text-white opacity-80" />
-              <p className="text-xs ml-3 text-orange-200">0 </p>
-            </div>
+          <div className="text-sm mx-2 text-slate-200 font-thin ml-auto">
+            {formatTimeDifference(post.createdAt)}
           </div>
         </div>
+        <div className="border-b-2 border-slate-800 flex flex-col min-h-[70px] justify-center">
+          <div className="w-full font-normal text-md px-5 py-2 sm:text-xl">
+            {post.caption}
+          </div>
+        </div>
+        <div className="w-full h-10 border-b-2 border-slate-800 flex flex-row items-center justify-center py-2">
+          <div className="w-full flex items-center justify-center">
+            {liked ? (
+              <MdFavorite
+                className="text-xl text-orange-500 transition-opacity duration-300"
+                onClick={handleLike}
+              />
+            ) : (
+              <MdFavoriteBorder
+                className="text-xl text-white opacity-80 transition-opacity duration-300"
+                onClick={handleLike}
+              />
+            )}
+            <p className="text-xs ml-3 text-orange-200">{likedCount} </p>
+          </div>
+          <div className="w-full flex items-center justify-center">
+            <BsChat className="text-xl text-white opacity-80" />
+            <p className="text-xs ml-3 text-orange-200">
+              {post.comments.length}
+            </p>
+          </div>
+          <div className="w-full flex items-center justify-center">
+            <LiaBookmarkSolid className="text-xl text-white opacity-80" />
+            <p className="text-xs ml-3 text-orange-200">0 </p>
+          </div>
+        </div>
+        <div className="h-20 border-b-2 border-slate-800 flex flex-col">
+          <Comment post={post} />
+        </div>
       </div>
-      {/* <img src={post.image.public_url} alt="Post" /> */}
-    </div>
+    </>
   );
 }
 
