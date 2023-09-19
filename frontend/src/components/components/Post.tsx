@@ -14,6 +14,7 @@ function Post({ post }: { post: IPost }) {
   const [owner, setOwner] = useState<IUser | null>(null);
   const [likedCount, setLikeCount] = useState(post.likes.length);
 
+
   useEffect(() => {
     const userLiked = post.likes.some(
       (like) => like._id.toLowerCase() === (user && user._id.toLowerCase())

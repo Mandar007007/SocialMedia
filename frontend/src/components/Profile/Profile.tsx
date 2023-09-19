@@ -9,7 +9,7 @@ function Profile() {
   
   return (
     <>
-      {user && <About />}
+      {user && <About/>}
       <Footer />
       <MyFeed />
     </>

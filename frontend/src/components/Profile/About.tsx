@@ -17,9 +17,10 @@ function About() {
     openEditForm(!editForm);
   };
 
+
   return (
     <>
-      <div className="flex flex-row text-white bg-black h-14 w-screen items-center opacity-90 sticky top-0 z-20">
+      <div className="flex flex-row text-white bg-black h-14 w-screen items-center opacity-80 sticky top-0 z-20">
         <p className="ml-4 text-xl">
           <BiLeftArrow onClick={() => navigate("/home")} />
         </p>
@@ -32,13 +33,13 @@ function About() {
             alt="profile pic"
             src={user && user.avtar.url}
           ></img>
-          <button
+          {true && <button
             className="border-slate-400 text-slate-300 border-2 absolute -bottom-11 right-2 p-1 px-2 rounded-3xl"
             title="Close Login"
             onClick={handleClick}
           >
             Edit Profiles
-          </button>
+          </button>}
         </div>
         <div className="w-full mt-12 px-6 py-3">
           <p className="font-black text-2xl">{user.name}</p>
