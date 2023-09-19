@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Menu from "../Menu/Menu";
 import Footer from "../Footer/Footer";
 import Feed from "../Feed/Feed";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 import SideMenu from "../Menu/SideMenu";
+import Chatters from "../Search/Chatters";
 
 function Home() {
   const { user } = useSelector((state: RootState) => state.user);
@@ -28,19 +29,22 @@ function Home() {
         {isMobile && (
           <>
             {user && <Menu />}
-            <Feed />
+            <Feed isMobile={isMobile} />
             <Footer />
           </>
         )}
 
         {/* Laptop Layout */}
         {!isMobile && (
-          <div className="w-screen px-24 grid grid-cols-4 text-white">
-            <div className="col-span-1 border-r-1 p-2">
+          <div className="w-screen px-24 grid grid-cols-5 text-white">
+            <div className="col-span-1 border-r-1 p-2 border-gray-600">
               {user && <SideMenu />}
             </div>
             <div className="col-span-2 ">
-              <Feed />
+              <Feed isMobile={isMobile} />
+            </div>
+            <div className="col-span-2 border-l-1 p-2 border-gray-600">
+              <Chatters />
             </div>
           </div>
         )}

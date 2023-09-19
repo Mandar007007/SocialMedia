@@ -75,7 +75,7 @@ exports.login = async (req, res) => {
     }
 
     const token = await user.generateToken();
-
+    
     res.status(200).cookie("token", token, { expires: new Date(Date.now() + 1 * 24 * 60 * 60 * 1000), httpOnly: true }).json({
       success: true,
       user,
@@ -168,11 +168,12 @@ exports.updatePassword = async (req, res) => {
 
 
 exports.updateProfile = async (req, res) => {
-  console.log("In updateProfile")
   try {
     const user = await User.findById(req.user._id)
     const { name, email } = req.body
-    const file = req.files.avtar
+    let file = null
+    if(req.files)
+      file = req.files.avtar
 
     if (name) {
       user.name = name
@@ -193,7 +194,8 @@ exports.updateProfile = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      message: "Profile Updated"
+      message: "Profile Updated",
+      user
     })
 
   } catch (e) {

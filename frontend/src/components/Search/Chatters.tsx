@@ -35,7 +35,9 @@ function Chatters() {
   }, []);
   return (
     <>
-      <h1>{chatters}</h1>
+      <div className="h-screen">
+        <h1>{chatters}</h1>
+      </div>
     </>
   );
 }

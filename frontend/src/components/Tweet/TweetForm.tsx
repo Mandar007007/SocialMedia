@@ -52,7 +52,7 @@ function TweetForm({ closeTweetForm }: TweetProps) {
         method="POST"
         className="flex flex-col text-left text-base"
       >
-        <motion.div className="w-100 text-center flex flex-row items-center">
+        <motion.div className="w-full text-center flex flex-row items-center">
           <img
             className="w-16 h-16 rounded-full border-1 border-orange-400"
             src={user && user.avtar.url}

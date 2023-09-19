@@ -6,7 +6,7 @@ import { RootState } from "../../store";
 
 function Profile() {
   const { user } = useSelector((state: RootState) => state.user);
-
+  
   return (
     <>
       {user && <About />}

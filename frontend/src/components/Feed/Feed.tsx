@@ -1,8 +1,9 @@
 import { useRef, useState } from "react";
 import FollowingFeed from "./FollowingFeed";
 import Recommendation from "./Recommendation";
+import TweetForm from "../Tweet/TweetForm";
 
-function Feed() {
+function Feed({ isMobile }) {
   const foryouRef = useRef(null);
   const followingRef = useRef(null);
   const [isForyouOpen, setIsForyouOpen] = useState(true);
@@ -15,7 +16,7 @@ function Feed() {
 
   return (
     <>
-      <div className="flex flex-row w-full py-3 h-16 text-white bg-black sticky top-0 z-30 sm:h-24">
+      <div className="flex flex-row w-full py-3 h-16 text-white bg-black sticky top-0 z-30 sm:h-24 ">
         <button
           className="basis-1/2 flex justify-center items-center"
           ref={foryouRef}
@@ -43,10 +44,13 @@ function Feed() {
           </p>
         </button>
       </div>
-      <hr className="border-t-2 border-slate-500" />
+      <div className="px-5 py-2">
+        {!isMobile && <TweetForm closeTweetForm={() => {}} />}
+      </div>
+      {/* <hr className="w-full border-t-2 border-slate-500" /> */}
       {isForyouOpen && <Recommendation />}
       {isFollowingOpen && <FollowingFeed />}
-      <div className="h-40 w-full"></div>
+      <div className="h-40 w-full sm:w-[90%]"></div>
     </>
   );
 }

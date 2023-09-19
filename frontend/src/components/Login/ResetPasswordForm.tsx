@@ -45,7 +45,7 @@ function ResetPasswordForm() {
   return (
     <>
     <form className='h-screen z-40' action="" onSubmit={handleSubmit}>
-    <input type="email" placeholder='Email' className='text-black' onChange={handleChange} value={email}></input>
+    <input type="email" placeholder='Email' className='text-black ' onChange={handleChange} value={email}></input>
     <button type='submit'>Submit</button>
     </form>
     </>

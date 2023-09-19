@@ -197,6 +197,7 @@ exports.commentOnPost = async (req, res, next) => {
       })
 
     } else {
+
       post.comments.push({
         user: req.user._id,
         comment: req.body.comment,
@@ -209,7 +210,6 @@ exports.commentOnPost = async (req, res, next) => {
       success: true,
       message: "Post Saved"
     })
-
 
   } catch (e) {
     res.status(500).json({

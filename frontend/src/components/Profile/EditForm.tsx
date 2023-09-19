@@ -13,8 +13,9 @@ export function EditForm() {
   const [formData, setFormData] = useState({
     name: user.name,
     email: user.email,
-    avtar: user.avtar.url,
+    avtar: null,
   });
+
   const [selectedImage, setSelectedImage] = useState(user.avtar.url);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -40,21 +41,21 @@ export function EditForm() {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      const response = await axios.post(
+      const response = await axios.put(
         "http://localhost:4000/api/v1/update/profile",
         formData,
         {
           headers: {
             "Content-Type": "multipart/form-data",
           },
+          withCredentials: true,
         }
       );
       const userData = response.data.user;
+      console.log(response);
       dispatch({ type: "SET_USER", payload: userData });
       navigate("/profile");
     } catch (error) {
-      console.error("Error in handleSubmit:", error);
-
       const err = error as AxiosError<ErrorResponseData>;
       let message = "Error in the update.";
 
