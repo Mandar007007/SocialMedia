@@ -4,8 +4,9 @@ import Home from "./components/Home/Home";
 import Index from "./components/Home/Index";
 import Profile from "./components/Profile/Profile";
 import { useEffect } from "react";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useDispatch } from "react-redux";
+import ErrorResponseData from "./interfaces/ErrorResponseData";
 
 function App() {
   const dispatch = useDispatch();
@@ -25,7 +26,8 @@ function App() {
         dispatch({ type: "CLEAR_USER" });
       }
     } catch (error) {
-      console.log(error.message);
+      const err = error as AxiosError<ErrorResponseData>;
+      console.log(err.message);
     }
   };
 
