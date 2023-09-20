@@ -1,7 +1,7 @@
 import Items from "./Items";
 import UserDetails from "./UserDetails";
 
-function SideMenu() {
+function SideMenu({ isMobile, closeProfile, openProfile }) {
   return (
     <>
       <div className="ml-20 sticky top-2 left-0">
@@ -11,7 +11,11 @@ function SideMenu() {
           alt=""
         />
         <UserDetails />
-        <Items />
+        <Items
+          isMobile={isMobile}
+          closeProfile={closeProfile}
+          openProfile={openProfile}
+        />
       </div>
     </>
   );
