@@ -184,8 +184,10 @@ exports.updateProfile = async (req, res) => {
     if (file) {
       let url, public_id
       await cloudinary.uploader.upload(file.tempFilePath, (err, result) => {
+        if(!err){
         url = result.url
         public_id = result.public_id
+        }
       })
       user.avtar = { url, public_id }
     }

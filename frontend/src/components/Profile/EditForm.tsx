@@ -41,6 +41,8 @@ export function EditForm() {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
+      const resolveFun = async () => {
+        try{
       const response = await axios.put(
         "http://localhost:4000/api/v1/update/profile",
         formData,
@@ -54,7 +56,44 @@ export function EditForm() {
       const userData = response.data.user;
       console.log(response);
       dispatch({ type: "SET_USER", payload: userData });
-      // navigate("/profile");
+      }
+      catch(error)
+      {
+        console.log(error.message)
+      }
+    }
+      toast.promise(
+        resolveFun,
+        {
+          pending: {
+            render(){
+              return "Updating"
+            },
+              position: "bottom-center",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "dark",
+          },
+          success: {
+            render(){
+              return 'Updated Successfully 👌'
+            },
+            
+          },
+          error: {
+            render({data})
+            {
+              return  `error while updation :${data.message}`
+            }
+          }
+        },
+        
+    )
+      navigate("/profile");
     } catch (error) {
       const err = error as AxiosError<ErrorResponseData>;
       let message = "Error in the update.";

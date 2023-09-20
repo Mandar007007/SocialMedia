@@ -17,6 +17,7 @@ function About({ isMobile, closeProfile }) {
     openEditForm(!editForm);
   };
 
+
   return (
     <>
       <div className="flex flex-row text-white bg-black h-14 w-full items-center opacity-90 sticky top-0 z-20">
@@ -33,13 +34,13 @@ function About({ isMobile, closeProfile }) {
             alt="profile pic"
             src={user && user.avtar.url}
           ></img>
-          <button
+          {true && <button
             className="border-slate-400 text-slate-300 border-2 absolute -bottom-11 right-2 p-1 px-2 rounded-3xl"
             title="Close Login"
             onClick={handleClick}
           >
             Edit Profiles
-          </button>
+          </button>}
         </div>
         <div className="w-full mt-12 px-6 py-3">
           <p className="font-black text-2xl">{user.name}</p>
