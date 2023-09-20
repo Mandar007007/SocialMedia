@@ -23,7 +23,7 @@ function MyFeed() {
     setRepliesOpen(false);
   };
   return (
-    <div className="w-screen text-white">
+    <div className="w-full text-white">
       <div className="flex flex-row w-full py-3 relative">
         <button
           className="basis-1/3 flex justify-center items-center"

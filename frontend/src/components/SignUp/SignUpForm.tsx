@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { LeftToRight } from "../../other/motionVariants";
 import ErrorResponseData from "../../interfaces/ErrorResponseData";
-import { GiPreviousButton } from "react-icons/gi";
 
 function SignUpForm() {
   const dispatch = useDispatch();
@@ -20,21 +19,21 @@ function SignUpForm() {
     name: "",
     email: "",
     password: "",
-    avtar:null,
+    avtar: null,
   });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, files } = event.target;
-  
+
     if (name === "avtar" && files && files[0]) {
       const imageFile = files[0];
-  
+
       // Use the updater function to ensure the state update is based on the previous state
       setFormData((prevFormData) => ({
         ...prevFormData,
         [name]: imageFile,
       }));
-  
+
       const imageUrl = URL.createObjectURL(imageFile);
       setSelectedImage(imageUrl);
     } else {
@@ -45,40 +44,40 @@ function SignUpForm() {
     }
   };
 
-const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-  event.preventDefault();
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
 
-  try {
-    console.log("formData before submit:", formData); 
+    try {
+      console.log("formData before submit:", formData);
 
-    const response = await axios.post(
-      "http://localhost:4000/api/v1/register",
-      formData,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-        withCredentials: true,
+      const response = await axios.post(
+        "http://localhost:4000/api/v1/register",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+          withCredentials: true,
+        }
+      );
+
+      const userData = response.data.user;
+      dispatch({ type: "SET_USER", payload: userData });
+      navigate("/home");
+    } catch (error) {
+      const err = error as AxiosError<ErrorResponseData>;
+      let message = "An error occurred during signup.";
+
+      if (err.response && err.response.data) {
+        if (err.response.data.msg) {
+          message = err.response.data.msg;
+        } else if (err.response.data.message) {
+          message = err.response.data.message;
+        }
       }
-    );
-
-    const userData = response.data.user;
-    dispatch({ type: "SET_USER", payload: userData });
-    navigate("/home");
-  } catch (error) {
-    const err = error as AxiosError<ErrorResponseData>;
-    let message = "An error occurred during signup.";
-
-    if (err.response && err.response.data) {
-      if (err.response.data.msg) {
-        message = err.response.data.msg;
-      } else if (err.response.data.message) {
-        message = err.response.data.message;
-      }
+      toast.error(message);
     }
-    toast.error(message);
-  }
-};
+  };
   return (
     <>
       <form
@@ -95,16 +94,24 @@ const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
           >
             <img src={selectedImage} alt="w-full h-full bg-cover absolute" />
           </label>
-          <motion.input
-          variants={LeftToRight}
-          type="file"
-          name="avtar"
-          id="avtar"
-          onChange={handleChange}
-          aria-labelledby="avtar"
-          className="my-3 border-b-2 bg-transparent border-gray-400 focus:outline-none focus:border-slate-600 focus:invalid:border-pink-600 invalid:border-pink-600
- appearance-none"
-        />
+          <input
+            type="file"
+            id="avatar"
+            name="avtar"
+            accept="image/*"
+            onChange={handleChange}
+            aria-labelledby="avatar"
+            className={`
+            my-3 ml-3 hidden w-full text-sm text-slate-500 
+            file:w-20 file:h-20
+            file:mr-4 file:py-2 file:px-4
+            file:rounded-full file:border-0
+            file:text-sm file:font-semibold
+            file:bg-orange-50 file:text-black
+            hover:file:bg-orange-100
+            file:bg-center file:bg-cover file:bg-no-repeat
+          `}
+          />
         </motion.div>
         <motion.label htmlFor="name" className="my-3">
           Name:

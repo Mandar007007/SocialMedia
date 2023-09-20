@@ -28,7 +28,7 @@ function MyPosts() {
 
   return (
     <>
-      <div>
+      <div className="px-5">
         {posts.map((post: IPost) => (
           <Post key={post._id} post={post} />
         ))}

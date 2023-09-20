@@ -6,10 +6,20 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 import SideMenu from "../Menu/SideMenu";
 import Chatters from "../Search/Chatters";
+import Profile from "../Profile/Profile";
 
 function Home() {
   const { user } = useSelector((state: RootState) => state.user);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 640);
+  const [openProfile, setOpenProfile] = useState(false);
+
+  const openProfileSection = () => {
+    setOpenProfile(true);
+  };
+
+  const closeProfile = () => {
+    setOpenProfile(false);
+  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -38,10 +48,19 @@ function Home() {
         {!isMobile && (
           <div className="w-screen px-24 grid grid-cols-5 text-white">
             <div className="col-span-1 border-r-1 p-2 border-gray-600">
-              {user && <SideMenu />}
+              {user && (
+                <SideMenu
+                  isMobile={isMobile}
+                  closeProfile={closeProfile}
+                  openProfile={openProfileSection}
+                />
+              )}
             </div>
             <div className="col-span-2 ">
-              <Feed isMobile={isMobile} />
+              {openProfile && (
+                <Profile isMobile={isMobile} closeProfile={closeProfile} />
+              )}
+              {!openProfile && <Feed isMobile={isMobile} />}
             </div>
             <div className="col-span-2 border-l-1 p-2 border-gray-600">
               <Chatters />

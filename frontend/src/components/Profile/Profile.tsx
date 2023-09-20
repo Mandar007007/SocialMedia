@@ -4,13 +4,13 @@ import About from "./About";
 import MyFeed from "./MyFeed";
 import { RootState } from "../../store";
 
-function Profile() {
+function Profile({ isMobile, closeProfile }) {
   const { user } = useSelector((state: RootState) => state.user);
-  
+
   return (
     <>
-      {user && <About/>}
-      <Footer />
+      {user && <About isMobile={isMobile} closeProfile={closeProfile} />}
+      {isMobile && <Footer />}
       <MyFeed />
     </>
   );

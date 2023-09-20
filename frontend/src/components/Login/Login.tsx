@@ -21,13 +21,13 @@ function Login({ closeLogin }: LoginProps) {
         </div>
       </div>
 
-      <div className="my-10 text-3xl font-black">
+      <div className="mt-10 text-3xl font-black">
         <p>Welcome back</p>
         <LoginForm />
       </div>
-      <div className="mt-10 text-3xl font-black">
+      <div className="mb-5 text-xl font-black">
         <ResetPassword />
-        </div>
+      </div>
     </motion.div>
   );
 }

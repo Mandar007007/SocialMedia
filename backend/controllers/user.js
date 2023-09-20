@@ -18,7 +18,7 @@ exports.register = async (req, res) => {
     let url = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.vecteezy.com%2Ffree-vector%2Fdefault-profile-picture&psig=AOvVaw0VI5-gwluF2jryHsQr2C14&ust=1692935729740000&source=images&cd=vfe&opi=89978449&ved=0CA4QjRxqFwoTCLDXztyz9IADFQAAAAAdAAAAABAI", public_id = "sampleid"
 
     await cloudinary.uploader.upload(file.tempFilePath, (err, result) => {
-      if(err) console.log(err)
+      if (err) console.log(err)
       url = result.url
       public_id = result.public_id
     })
@@ -75,7 +75,7 @@ exports.login = async (req, res) => {
     }
 
     const token = await user.generateToken();
-    
+
     res.status(200).cookie("token", token, { expires: new Date(Date.now() + 1 * 24 * 60 * 60 * 1000), httpOnly: true }).json({
       success: true,
       user,
@@ -172,7 +172,7 @@ exports.updateProfile = async (req, res) => {
     const user = await User.findById(req.user._id)
     const { name, email } = req.body
     let file = null
-    if(req.files)
+    if (req.files)
       file = req.files.avtar
 
     if (name) {
@@ -360,7 +360,7 @@ exports.resetPassword = async (req, res) => {
 exports.getAllUsers = async (req, res) => {
   try {
 
-    const users = await User.find()
+    const users = await User.find({})
 
     res.status(200).json({
       success: true,

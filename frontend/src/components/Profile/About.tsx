@@ -8,7 +8,7 @@ import { EditForm } from "./EditForm";
 import { ToastContainer } from "react-toastify";
 import { contextClass } from "../../other/customToaster";
 
-function About() {
+function About({ isMobile, closeProfile }) {
   const [editForm, openEditForm] = useState(false);
   const navigate = useNavigate();
   const { user } = useSelector((state: RootState) => state.user);
@@ -20,14 +20,15 @@ function About() {
 
   return (
     <>
-      <div className="flex flex-row text-white bg-black h-14 w-screen items-center opacity-80 sticky top-0 z-20">
+      <div className="flex flex-row text-white bg-black h-14 w-full items-center opacity-90 sticky top-0 z-20">
         <p className="ml-4 text-xl">
-          <BiLeftArrow onClick={() => navigate("/home")} />
+          {isMobile && <BiLeftArrow onClick={() => navigate("/home")} />}
+          {!isMobile && <BiLeftArrow onClick={closeProfile} />}
         </p>
         <p className="text-xl font-bold ml-2">{user.name}</p>
       </div>
-      <div className="w-screen relative text-white">
-        <div className="w-[100%] h-28 bg-orange-400 relative">
+      <div className="w-full relative text-white">
+        <div className="w-full h-28 bg-orange-400 relative">
           <img
             className="w-24 h-24 left-2 bg-slate-200 border-8 border-orange-400 absolute -bottom-10 rounded-full"
             alt="profile pic"
@@ -62,8 +63,8 @@ function About() {
             </div>
           </div>
         </div>
+        {editForm && <EditForm />}
       </div>
-      {editForm && <EditForm />}
       <ToastContainer
         toastClassName={({ type }) =>
           contextClass[type || "default"] +
