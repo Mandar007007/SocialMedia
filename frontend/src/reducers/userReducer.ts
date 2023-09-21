@@ -1,7 +1,7 @@
 const intitalState = {
   user: null,
   isAuthenticated:false,
-  proUser:null
+  prouser:null
 };
 
 const userReducer = (state = intitalState, action) => {
@@ -17,6 +17,16 @@ const userReducer = (state = intitalState, action) => {
         ...state,
         user: null,
       };
+    case "SET_PROUSER":
+      return {
+        ...state,
+        prouser:action.payload
+      };
+    case "CLEAR_PROUSER":
+      return {
+        ...state,
+        prouser:null
+      }
 
     default:
       return state;

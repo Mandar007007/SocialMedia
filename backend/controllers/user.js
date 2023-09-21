@@ -412,6 +412,24 @@ exports.searchUser = async (req, res) => {
   }
 };
 
+exports.getUserByEmail = async (req,res) => {
+  try{
+
+    const user = await User.find({email:req.params.email})
+
+    res.json({
+      success:true,
+      user
+    })
+
+  }catch(e){
+    res.json({
+      success:false,
+      error:e.message
+    })
+  }
+}
+
 
 
 

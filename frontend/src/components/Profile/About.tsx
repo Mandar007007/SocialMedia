@@ -1,5 +1,5 @@
 import { BsCalendar3 } from "react-icons/bs";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store";
 import { BiLeftArrow } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
@@ -11,7 +11,11 @@ import { contextClass } from "../../other/customToaster";
 function About() {
   const [editForm, openEditForm] = useState(false);
   const navigate = useNavigate();
-  const { user } = useSelector((state: RootState) => state.user);
+  let { user } = useSelector((state: RootState) => state.user);
+  const {prouser} = useSelector((state:RootState) => state.user);
+  const dispatch = useDispatch();
+
+  user = prouser ?? user
 
   const handleClick = () => {
     openEditForm(!editForm);
@@ -22,7 +26,9 @@ function About() {
     <>
       <div className="flex flex-row text-white bg-black h-14 w-screen items-center opacity-80 sticky top-0 z-20">
         <p className="ml-4 text-xl">
-          <BiLeftArrow onClick={() => navigate("/home")} />
+          <BiLeftArrow onClick={() => {
+            dispatch({type:"CLEAR_PROUSER"})
+            navigate("/home")}} />
         </p>
         <p className="text-xl font-bold ml-2">{user.name}</p>
       </div>
