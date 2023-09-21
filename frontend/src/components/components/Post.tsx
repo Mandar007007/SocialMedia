@@ -3,18 +3,20 @@ import { MdFavoriteBorder, MdFavorite } from "react-icons/md";
 import { LiaBookmarkSolid } from "react-icons/lia";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store";
 import formatTimeDifference from "../../functions/formatTimeDifference";
 import { IPost, IUser } from "../../interfaces/Model";
 import Comment from "../Comment/Comment";
+import { useNavigate } from "react-router-dom";
 
 function Post({ post }: { post: IPost }) {
   const { user } = useSelector((state: RootState) => state.user);
   const [liked, setLiked] = useState<boolean>(false);
   const [owner, setOwner] = useState<IUser | null>(null);
   const [likedCount, setLikeCount] = useState(post.likes.length);
-
+  const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   useEffect(() => {
     const userLiked = post.likes.some(
@@ -61,6 +63,28 @@ function Post({ post }: { post: IPost }) {
     }
   };
 
+  const handleClick = async(event) => {
+    try{
+      const email = event.target.querySelector('div').getAttribute('value')
+      const response = await axios.get(`http://localhost:4000/api/v1/getByEmail/${email}`,
+      {
+        headers:{
+          "Content-Type": "application/json",
+        },
+        withCredentials:true
+      })
+
+      const user = response.data.user[0]
+      dispatch({type:"SET_PROUSER",payload:user})
+      navigate("/profile")
+      
+
+    }catch(e)
+    {
+      console.log(e.message)
+    }
+  }
+
   return (
     <>
       <div className="w-full rounded-lg shadow-sm text-xl my-8 border-3 border-slate-900  sm:my-8">
@@ -71,8 +95,9 @@ function Post({ post }: { post: IPost }) {
             alt="profile-pic"
           />
 
-          <div className="text-md mx-3 text-white font-bold">
+          <div onClick={handleClick} className="text-md mx-3 text-white font-bold">
             {owner && owner.name}
+            <div className="hidden" value={owner?.email}></div>
           </div>
           <div className="text-sm mx-2 text-slate-200 font-thin ml-auto">
             {formatTimeDifference(post.createdAt)}
