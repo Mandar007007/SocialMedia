@@ -29,6 +29,7 @@ function TweetForm({ closeTweetForm }: TweetProps) {
         withCredentials: true,
       });
       closeTweetForm();
+      window.location.reload();
     } catch (error) {
       const err = error as AxiosError<ErrorResponseData>;
       console.log(err);

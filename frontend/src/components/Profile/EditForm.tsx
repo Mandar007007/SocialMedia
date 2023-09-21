@@ -110,18 +110,18 @@ export function EditForm() {
   };
 
   return (
-    <div className="h-screen w-screen absolute top-0 left-0 bg-black text-white z-10">
-      <div className="flex column h-full w-full center items-center justify-center">
+    <div className="h-screen w-full absolute top-0 left-0 bg-black text-white z-10 sm:h-[150%]">
+      <div className="flex column h-full w-full center items-center justify-center sm:items-start sm:justify-start ">
         <form
           onSubmit={handleSubmit}
           action=""
           method="POST"
           className="flex flex-col w-full mt-5 text-left text-base px-5"
         >
-          <div className="flex column w-full center items-center justify-center">
+          <div className="flex column w-full center items-center justify-center sm:items-start sm:justify-start">
             <label
               htmlFor="avatar"
-              className="w-20 h-20 rounded-full border-2 border-orange-200 flex justify-center items-center truncate relative sm:w-24 sm:h-20"
+              className="w-20 h-20 sm:h-24 rounded-full border-2 border-orange-200 flex justify-center items-center truncate relative sm:w-24"
             >
               <img src={selectedImage} alt="w-full h-full bg-cover absolute" />
             </label>

@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-function Items() {
+function Items({ isMobile, closeProfile, openProfile }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -35,7 +35,8 @@ function Items() {
             <GiPlagueDoctorProfile className="text-2xl" />
           </div>
           <div className="basis-5/6 w-full ml-5">
-            <Link to="/profile">Profile</Link>
+            {isMobile && <Link to="/profile">Profile</Link>}
+            {!isMobile && <button onClick={openProfile}>Profile</button>}
           </div>
         </div>
         <div className="w-full flex items-center text-xl font-semibold my-3">
