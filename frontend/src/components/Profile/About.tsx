@@ -26,10 +26,9 @@ function About({ isMobile, closeProfile }) {
     <>
       <div className="flex flex-row text-white bg-black h-14 w-full items-center opacity-90 sticky top-0 z-20">
         <p className="ml-4 text-xl">
-          {isMobile &&  <BiLeftArrow onClick={() => {
+           <BiLeftArrow onClick={() => {
             dispatch({type:"CLEAR_PROUSER"})
-            navigate("/home")}} />}
-          {!isMobile && <BiLeftArrow onClick={closeProfile} />}
+            navigate("/home")}} />
         </p>
         <p className="text-xl font-bold ml-2">{user.name}</p>
       </div>

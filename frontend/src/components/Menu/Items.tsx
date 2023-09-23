@@ -35,8 +35,8 @@ function Items({ isMobile, closeProfile, openProfile }) {
             <GiPlagueDoctorProfile className="text-2xl" />
           </div>
           <div className="basis-5/6 w-full ml-5">
-            {isMobile && <Link to="/profile">Profile</Link>}
-            {!isMobile && <button onClick={openProfile}>Profile</button>}
+            {<Link to="/profile">Profile</Link>}
+            {/* {!isMobile && <button onClick={openProfile}>Profile</button>} */}
           </div>
         </div>
         <div className="w-full flex items-center text-xl font-semibold my-3">
