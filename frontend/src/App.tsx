@@ -2,7 +2,7 @@ import "./App.css";
 import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
 import Home from "./components/Home/Home";
 import Index from "./components/Home/Index";
-import Profile from "./components/Profile/Profile";
+import Profile from "./components/Screens/Mobile/Profile/Profile";
 import { useEffect } from "react";
 import axios, { AxiosError } from "axios";
 import { useDispatch } from "react-redux";

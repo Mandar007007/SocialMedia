@@ -1,5 +1,5 @@
 const express = require("express");
-const { createPost, likeAndUnlikePost, deletePost, getPostOfFollowing, updateCaption, commentOnPost, deleteComment, getMyPosts, getLikedPosts, getRecommendation } = require("../controllers/post");
+const { createPost, likeAndUnlikePost, deletePost, getPostOfFollowing, updateCaption, commentOnPost, deleteComment, getMyPosts, getLikedPosts, getRecommendation, getPostById } = require("../controllers/post");
 const { isAuthenticated } = require("../middlewares/auth");
 const router = express.Router();
 
@@ -10,5 +10,6 @@ router.route("/post/comment/:id").put(isAuthenticated, commentOnPost).delete(isA
 router.route("/posts/me").get(isAuthenticated, getMyPosts)
 router.route("/posts/liked").get(isAuthenticated, getLikedPosts)
 router.route("/posts/recommendation").get(isAuthenticated, getRecommendation)
+router.route("/posts/:id").get(isAuthenticated, getPostById)
 
 module.exports = router
