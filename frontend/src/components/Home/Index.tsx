@@ -1,6 +1,6 @@
 import { FaCopyright } from "react-icons/fa";
-import Login from "../Login/Login";
-import Signup from "../SignUp/SignUp";
+import Login from "../Auth/Login/Login";
+import Signup from "../Auth/SignUp/SignUp";
 import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { contextClass } from "../../other/customToaster";
