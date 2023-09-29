@@ -106,9 +106,16 @@ function ChatForm() {
             value={formData.caption}
             onChange={handleChange}
           />
-          <p className="text-sm font-semibold text-orange-400">
-            {240 - formData.caption.length}/240
-          </p>
+          <div className="w-full flex flex-row">
+            <p className="text-sm font-semibold text-orange-400">
+              {240 - formData.caption.length}/240
+            </p>
+            <button className="ml-auto">
+              <p className="text-sm font-semibold text-orange-400 ml-auto">
+                Generate Challenge Post
+              </p>
+            </button>
+          </div>
         </div>
         <div className="my-2">
           <label htmlFor="image" className="cursor-pointer">
@@ -124,7 +131,7 @@ function ChatForm() {
             onChange={handleChange}
           />
           {imagePreview && (
-            <div className="flex ">
+            <div className="flex">
               <img
                 src={imagePreview}
                 alt="Selected Preview"
