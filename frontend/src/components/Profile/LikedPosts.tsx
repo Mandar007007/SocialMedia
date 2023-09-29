@@ -1,8 +1,8 @@
 import axios, { AxiosError } from "axios";
 import { useEffect, useState } from "react";
-import ErrorResponseData from "../../../../interfaces/ErrorResponseData";
-import { IPost } from "../../../../interfaces/Model";
-import Post from "../Post/Post";
+import ErrorResponseData from "../../interfaces/ErrorResponseData";
+import { IPost } from "../../interfaces/Model";
+import Post from "../Screens/Mobile/Post/Post";
 
 function LikedPosts() {
   const [posts, setPosts] = useState([]); // Provide the type here

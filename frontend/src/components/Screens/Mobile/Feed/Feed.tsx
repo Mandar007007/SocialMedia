@@ -15,7 +15,7 @@ function Feed() {
 
   return (
     <>
-      <div className="flex flex-row w-full py-3 h-16 text-white bg-black sticky top-0 z-30 sm:h-24 ">
+      <div className="flex flex-row w-full py-3 h-16 text-white bg-black sticky top-0 z-30  sm:w-[90%]">
         <button
           className="basis-1/2 flex justify-center items-center"
           ref={foryouRef}

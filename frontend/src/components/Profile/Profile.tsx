@@ -1,15 +1,16 @@
-import { useState, useEffect } from "react";
-import Menu from "../Screens/Mobile/Menu/Menu";
-import Footer from "../Screens/Mobile/Footer/Footer";
-import Feed from "../Screens/Mobile/Feed/Feed";
 import { useSelector } from "react-redux";
+import Footer from "../Screens/Mobile/Footer/Footer";
+import About from "./About";
+import MyFeed from "./MyFeed";
 import { RootState } from "../../store";
-import MenuSection from "../Screens/Desktop/Menu/MenuSection";
+import { useEffect, useState } from "react";
 import ChatForm from "../Screens/Desktop/ChatForm/ChatForm";
 import CommunitiesSection from "../Screens/Desktop/Communities/CommunitiesSection";
+import MenuSection from "../Screens/Desktop/Menu/MenuSection";
 
-function Home() {
+function Profile() {
   const { user } = useSelector((state: RootState) => state.user);
+
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 640);
 
   useEffect(() => {
@@ -26,12 +27,11 @@ function Home() {
   return (
     <>
       {isMobile && (
-        <div className="w-screen text-white">
-          {/* Mobile Layout */}
-          {user && <Menu />}
-          <Feed />
+        <>
+          {user && <About />}
           <Footer />
-        </div>
+          <MyFeed />
+        </>
       )}
 
       {!isMobile && (
@@ -40,10 +40,10 @@ function Home() {
           <div className="w-2/12 h-full m-5 ">{user && <MenuSection />}</div>
           <div className="w-6/12 flex flex-col ">
             <div className="h-auto m-5 rounded-lg border-2 border-slate-900 bg-slate-950">
-              <ChatForm />
+              <About />
             </div>
             <div className="h-5/6 m-5 ">
-              <Feed />
+              <MyFeed />
             </div>
           </div>
           <div className="w-4/12 flex flex-col">
@@ -56,4 +56,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Profile;
