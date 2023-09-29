@@ -4,7 +4,6 @@ import About from "./About";
 import MyFeed from "./MyFeed";
 import { RootState } from "../../store";
 import { useEffect, useState } from "react";
-import ChatForm from "../Screens/Desktop/ChatForm/ChatForm";
 import CommunitiesSection from "../Screens/Desktop/Communities/CommunitiesSection";
 import MenuSection from "../Screens/Desktop/Menu/MenuSection";
 
@@ -40,7 +39,7 @@ function Profile() {
           <div className="w-2/12 h-full m-5 ">{user && <MenuSection />}</div>
           <div className="w-6/12 flex flex-col ">
             <div className="h-auto m-5 rounded-lg border-2 border-slate-900 bg-slate-950">
-              <About />
+              {user && <About />}
             </div>
             <div className="h-5/6 m-5 ">
               <MyFeed />
