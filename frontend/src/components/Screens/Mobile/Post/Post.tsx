@@ -119,8 +119,8 @@ function Post({ post }: { post: IPost }) {
 
   return (
     <>
-      <div className="w-full rounded-lg shadow-sm text-xl my-8 border-3 border-slate-900  sm:my-8">
-        <div className="h-12 border-b-2 py-4 border-slate-800 flex flex-row items-center px-4">
+      <div className="w-full rounded-lg  text-xl my-8 border-2 border-slate-900 bg-slate-950  sm:my-8">
+        <div className="h-12 border-b-2 py-4 border-slate-900 flex flex-row items-center px-4">
           <img
             src={owner?.avtar?.url || "fallback-url"}
             className="h-8 w-8 bg-slate-400 rounded-full"

@@ -1,12 +1,12 @@
 import { BsCalendar3 } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../../../store";
+import { RootState } from "../../store";
 import { BiLeftArrow } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { EditForm } from "./EditForm";
 import { ToastContainer } from "react-toastify";
-import { contextClass } from "../../../../other/customToaster";
+import { contextClass } from "../../other/customToaster";
 
 function About() {
   const [editForm, openEditForm] = useState(false);

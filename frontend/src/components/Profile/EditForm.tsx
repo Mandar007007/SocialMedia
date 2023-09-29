@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../../../store";
+import { RootState } from "../../store";
 import axios, { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
-import ErrorResponseData from "../../../../interfaces/ErrorResponseData";
+import ErrorResponseData from "../../interfaces/ErrorResponseData";
 import { toast } from "react-toastify";
 
 export function EditForm() {

@@ -31,7 +31,7 @@ function Recommendation() {
   }, []);
 
   return (
-    <div className="px-1 sm:px-4">
+    <div>
       {posts.map((post: IPost) => (
         <Post key={post._id} post={post} />
       ))}
