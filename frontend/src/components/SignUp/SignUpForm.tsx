@@ -36,6 +36,7 @@ function SignUpForm() {
 
       const imageUrl = URL.createObjectURL(imageFile);
       setSelectedImage(imageUrl);
+      
     } else {
       setFormData((prevFormData) => ({
         ...prevFormData,
