@@ -16,6 +16,7 @@ const userReducer = (state = intitalState, action) => {
       return {
         ...state,
         user: null,
+        isAuthenticated : false
       };
     case "SET_PROUSER":
       return {

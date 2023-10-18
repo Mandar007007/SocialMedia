@@ -22,7 +22,6 @@ function FollowingFeed() {
           }
         );
         setPosts(res.data.posts);
-        // console.log(posts);
       } catch (error) {
         const err = error as AxiosError<ErrorResponseData>;
         console.log(err);
