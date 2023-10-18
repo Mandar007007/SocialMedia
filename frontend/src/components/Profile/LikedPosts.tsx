@@ -4,10 +4,9 @@ import ErrorResponseData from "../../interfaces/ErrorResponseData";
 import { IPost } from "../../interfaces/Model";
 import Post from "../Screens/Mobile/Post/Post";
 import { useSelector } from "react-redux";
-
 function LikedPosts() {
   const [posts, setPosts] = useState([]); // Provide the type here
-  const {prouser} = useSelector((state:RootState) => state.user);
+  const { prouser } = useSelector((state: RootState) => state.user);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -29,25 +28,25 @@ function LikedPosts() {
     };
 
     const fetchPostsOfProUser = async () => {
-      try{
-        const response = await axios.get(`http://localhost:4000/api/v1/posts/getLikedOfPro/${prouser._id}`,{
-          headers:{
-            "Content-Type": "application/json",
-          },
-          withCredentials:true
-        })
+      try {
+        const response = await axios.get(
+          `http://localhost:4000/api/v1/posts/getLikedOfPro/${prouser._id}`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+            withCredentials: true,
+          }
+        );
 
-        setPosts(response.data.posts)
-      }catch(error)
-      {
+        setPosts(response.data.posts);
+      } catch (error) {
         const err = error as AxiosError<ErrorResponseData>;
         console.log(err);
       }
-    }
-    if(prouser)
-      fetchPostsOfProUser()
-    else
-      fetchPosts();
+    };
+    if (prouser) fetchPostsOfProUser();
+    else fetchPosts();
   }, []);
 
   return (

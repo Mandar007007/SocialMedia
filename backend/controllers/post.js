@@ -300,6 +300,24 @@ exports.getLikedPosts = async (req, res) => {
 };
 
 exports.getLikedOfProuser = async (req, res) => {
+  try{
+    const posts = await Post.find({ "likes._id": req.params.id }).sort({ createdAt: -1 });
+    
+    res.status(200).json({
+      success:true,
+      posts
+    })
+
+  }catch(err)
+  {
+    res.status(500).json({
+      success: false,
+      message: e.message
+    });
+  }
+}
+
+exports.getLikedOfProuser = async (req, res) => {
   try {
     const posts = await Post.find({ "likes._id": req.params.id }).sort({ createdAt: -1 });
 
