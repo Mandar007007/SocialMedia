@@ -25,7 +25,7 @@ function Chatter({ chatter }) {
     <div className="w-[70%] flex flex-row items-center border-2 rounded-xl border-slate-700 my-5 px-5">
       <img
         className="w-10 h-10 rounded-full"
-        src={chatter.avtar.url}
+        src={chatter?.avtar?.url}
         alt="pic"
       />
       <div className="w-[40%] m-5">
