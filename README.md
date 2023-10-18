@@ -14,7 +14,7 @@
 </div>
 
 <div align="center">
-<h4>Steps to run projct</h4>
+<h4>🚀 Steps to run projct</h4>
 </div>
 <ol>
   <li>
@@ -51,12 +51,22 @@
 </ol>
 
 <div align="center">
-<h4>Admin</h4>
+
+  <h4>📝 Project Structure</h4>
+<blockquote style="padding:10px" align="left">
+  <b>backend</b> contains our node server. We created the RESTful API using the node + express and as database used MongoDB. <b>frontend</b> contains our frontend react app. <b>testing</b> folder right now contains only selenium test cases and project for front end testing but in future it also going to contain the backend test cases file also. 
+  For more knowledge go to this document. <b> Project_Report.pdf<b> 
+</blockquote>
+
 </div>
 
-<a href="https://github.com/rajatnai49">
-    <img src="https://avatars.githubusercontent.com/u/96529504?v=4" style="height:50px; border:2px solid orange; border-radius:50px"/>
-</a>
+<div align="center">
+<h4>🤹🏽 Admins</h4>
+</div>
+
 <a href="https://github.com/Mandar007007">
-    <img src="https://avatars.githubusercontent.com/u/90078170?v=4" style="height:50px; border:2px solid orange; border-radius:50px"/>
+    <img src="https://avatars.githubusercontent.com/u/90078170?v=4" style="height:50px; border:2px solid orange; border-radius:100%"/>
+</a>
+<a href="https://github.com/rajatnai49">
+    <img src="https://avatars.githubusercontent.com/u/96529504?v=4" style="height:50px; border:2px solid orange; border-radius:100%"/>
 </a>
